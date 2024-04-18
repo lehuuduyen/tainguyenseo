@@ -203,9 +203,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{!! url('assets/js/sb-admin-2.min.js') !!}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{!! url('assets/vendor/chart.js/Chart.min.js') !!}"></script>
 </body>
 
 </html>
