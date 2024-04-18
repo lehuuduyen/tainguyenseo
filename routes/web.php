@@ -18,7 +18,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     /**
      * Home Routes
      */
-    Route::get('/', 'LoginController@show')->name('login.show');
+    Route::get('/', 'HomeController@index')->name('home.index');
 
     Route::group(['middleware' => ['guest']], function () {
         /**
@@ -40,6 +40,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          */
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
         Route::get('/admin', 'AdminController@show');
+        Route::get('/categories', 'CategoriesController@index')->name('categories');
     });
 });
 

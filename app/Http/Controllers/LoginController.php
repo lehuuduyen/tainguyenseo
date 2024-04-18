@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -21,7 +20,7 @@ class LoginController extends Controller
     /**
      * Handle account login request
      * 
-     * @param LoginRequest $request
+     * @param Request $request
      * 
      * @return \Illuminate\Http\Response
      */
@@ -32,23 +31,11 @@ class LoginController extends Controller
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
-        // Attempt to authenticate the user
         if (Auth::attempt($credentials)) {
-            // Authentication passed...
             return redirect()->intended('/admin');
         } else {
-            // Authentication failed...
-            return back()->withInput()->withErrors(['username' => 'Invalid username or password']);
+            return back()->withInput()->withErrors(['username' => 'Tên đăng nhập hoặc mật khẩu không chính xác.']);
         }
-        // if (!Auth::validate($credentials)){
-        //     return redirect()->to('login')->withErrors(trans('auth.failed'));
-        // }
-
-        // $user = Auth::getProvider()->retrieveByCredentials($credentials);
-
-        // Auth::login($user);
-
-        // return $this->authenticated($request, $user);
     }
 
     /**
