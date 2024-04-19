@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Http\Request;
 
 /*
@@ -35,16 +36,21 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     });
 
     Route::group(['middleware' => ['auth']], function () {
-        /**
-         * Logout Routes
-         */
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
         Route::get('/admin', 'AdminController@show');
-        Route::get('/categories', 'CategoriesController@index')->name('categories');
+
+        /**
+         * Categories
+         */
+        Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
+
+        // Route::controller(CategoriesController::class)->group(function () {
+        //     Route::get('/categories', 'index');
+        //     Route::get('/categories/create','create');
+        //     Route::post('/categories', 'store');
+        //     Route::delete('/categories/{id}', 'destroy');
+        //     Route::get('/categories/{id}/edit', 'edit');
+        //     Route::put('/categories/{id}', 'update');
+        // });
     });
 });
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });

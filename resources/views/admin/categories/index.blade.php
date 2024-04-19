@@ -7,7 +7,7 @@
 		<h2> Danh mục </h2>
 	</div>
 	<div class="col-md-6 text-right">
-		<a class="btn btn-info" href="{{ url('groups/create') }}"> <i class="fa fa-plus"></i> Thêm danh mục </a>
+		<a class="btn btn-info" href="{{ url('categories/create') }}"> <i class="fa fa-plus"></i> Thêm danh mục </a>
 	</div>
 </div>
 
@@ -20,28 +20,38 @@
 					<tr>
 						<th>ID</th>
 						<th>Tên</th>
-						<th class="text-right">#</th>
+						<th>Danh mục phụ thuộc</th>
+						<th class="text-center">#</th>
 					</tr>
 				</thead>
 				<tfoot>
 					<tr>
 						<th>ID</th>
-						<th>Tên</th>
-						<th class="text-right">#</th>
+						<th>Tên danh mục</th>
+						<th>Danh mục phụ thuộc</th>
+						<th class="text-center">#</th>
 					</tr>
 				</tfoot>
 				<tbody>
+					@foreach ($categories as $category)
 					<tr>
-						<td> 1 </td>
-						<td> Tên link </td>
-						<td class="text-right">
-							<form method="POST" action=" {{ url('categories/' . "") }} ">
+						<td> {{ $category->id }} </td>
+						<td> {{ $category->name }} </td>
+						<td> {{ $category->getParentIdAttribute()['name'] }} </td>
+						<td class="text-center">
+							<form method="POST" action=" {{ route('categories.destroy', ['category' => $category->id]) }} ">
+								<a class="btn btn-primary btn-sm" href="{{ route('categories.edit', ['category' => $category->id]) }}">
+									<i class="fa fa-edit"></i>
+								</a>
 								@csrf
 								@method('DELETE')
-								<button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger"> <i class="fa fa-trash"></i> Delete </button>
+								<button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm">
+									<i class="fa fa-trash"></i>
+								</button>
 							</form>
 						</td>
 					</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>
