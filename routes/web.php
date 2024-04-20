@@ -20,6 +20,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
      * Home Routes
      */
     Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('/introduction', 'HomeController@introduction')->name('home.introduction');
+    Route::get('/regulations', 'HomeController@regulations')->name('home.regulations');
 
     Route::group(['middleware' => ['guest']], function () {
         /**
@@ -43,7 +45,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          * Categories
          */
         Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
-
+        /**
+         * Post
+         */
+        Route::resource('post', 'PostController', ['except' => ['show']]);
         // Route::controller(CategoriesController::class)->group(function () {
         //     Route::get('/categories', 'index');
         //     Route::get('/categories/create','create');

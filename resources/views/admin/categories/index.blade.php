@@ -21,6 +21,7 @@
 						<th>ID</th>
 						<th>Tên</th>
 						<th>Danh mục phụ thuộc</th>
+						<th>Được chọn</th>
 						<th class="text-center">#</th>
 					</tr>
 				</thead>
@@ -29,6 +30,7 @@
 						<th>ID</th>
 						<th>Tên danh mục</th>
 						<th>Danh mục phụ thuộc</th>
+						<th>Được chọn</th>
 						<th class="text-center">#</th>
 					</tr>
 				</tfoot>
@@ -38,6 +40,7 @@
 						<td> {{ $category->id }} </td>
 						<td> {{ $category->name }} </td>
 						<td> {{ $category->getParentIdAttribute()['name'] }} </td>
+						<td> {{ $category->getValueToSelectIsValidate()[$category->is_validate] }} </td>
 						<td class="text-center">
 							<form method="POST" action=" {{ route('categories.destroy', ['category' => $category->id]) }} ">
 								<a class="btn btn-primary btn-sm" href="{{ route('categories.edit', ['category' => $category->id]) }}">

@@ -32,6 +32,10 @@
                     <label for="parent_id">Danh mục phụ thuộc</label>
                     {{ Form::select('parent_id', [0 => 'Chọn danh mục phụ thuộc (nếu cần)'] + $categoriesList, NULL, [ 'class'=>'form-control', 'id' => 'parent_id']) }}
                 </div>
+                <div class="form-group">
+                    <label for="is_validate">Được chọn: </label>
+                    {{ Form::select('is_validate', $is_validate, NULL, [ 'class'=>'form-control', 'id' => 'is_validate']) }}
+                </div>
                 <button type="submit" class="btn btn-primary">Thêm</button>
                 {!! Form::close() !!}
             </div>

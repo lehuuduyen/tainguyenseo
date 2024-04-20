@@ -8,15 +8,15 @@
       </div>
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li>
-          <a class="nav-link px-2 text-secondary text-white" href="/jobs/" data-qtsb-section="NavBar" data-qtsb-label="BrowseJobs" id="nav-browse-jobs">
+          <a class="nav-link px-2 text-secondary text-white" href="/" data-qtsb-section="NavBar" data-qtsb-label="BrowseJobs" id="nav-browse-jobs">
             Tài nguyên </a>
         </li>
         <li>
-          <a class="nav-link px-2 text-secondary text-white" href="/info/how-it-works/" data-qtsb-section="NavBar" data-qtsb-label="HowItWorks" id="nav-how-it-works">
+          <a class="nav-link px-2 text-secondary text-white" href="/introduction/" data-qtsb-section="NavBar" data-qtsb-label="HowItWorks" id="nav-how-it-works">
             Giới thiệu công cụ </a>
         </li>
         <li>
-          <a class="nav-link px-2 text-secondary text-white" href="/info/how-it-works/" data-qtsb-section="NavBar" data-qtsb-label="HowItWorks" id="nav-how-it-works">
+          <a class="nav-link px-2 text-secondary text-white" href="/regulations/" data-qtsb-section="NavBar" data-qtsb-label="HowItWorks" id="nav-how-it-works">
             Quy định trung gian </a>
         </li>
       </ul>

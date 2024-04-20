@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Http\Requests\CategoriesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\AppHelper;
@@ -28,13 +29,14 @@ class CategoriesController extends Controller
     public function create()
     {
         $this->data['categoriesList'] = Categories::arrayForSelect();
+        $this->data['is_validate'] = Categories::getValueToSelectIsValidate();
         $this->data['headline']     = 'Thêm Danh Mục Mới';
         $this->data['mode']         = 'create';
 
         return view('admin.categories.form', $this->data);
     }
 
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
         $formData = $request->all();
         if (Categories::create($formData)) {
@@ -62,11 +64,8 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $this->data['category'] = Categories::findOrFail($id);
-        // echo "<pre>";
-        // var_dump($this->data['categories']->getParentIdAttribute());
-        // echo "</pre>";
-        // exit;
         $this->data['categoriesList'] = Categories::arrayForSelect();
+        $this->data['is_validate'] = Categories::getValueToSelectIsValidate();
         $this->data['mode']         = 'edit';
         $this->data['headline']     = 'Cập nhật danh mục';
         return view('admin.categories.form', $this->data);
@@ -79,21 +78,20 @@ class CategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(UpdateUserRequest $request, $id)
-    // {
-    //     $data               = $request->all();
+    public function update(CategoriesRequest $request, $id)
+    {
+        $data = $request->all();
 
-    //     $user               = Categories::find($id);
-    //     $user->group_id     = $data['group_id'];
-    //     $user->name         = $data['name'];
-    //     $user->email        = $data['email'];
-    //     $user->phone        = $data['phone'];
-    //     $user->address      = $data['address'];
+        $category = Categories::find($id);
+        $category->name = $data['name'];
+        $category->slug_name = AppHelper::instance()->create_slug($category->name);
+        $category->parent_id = $data['parent_id'];
+        $category->is_validate = $data['is_validate'];
 
-    //     if ($user->save()) {
-    //         Session::flash('message', 'User Updated Successfully');
-    //     }
+        if ($category->save()) {
+            Session::flash('message', 'Cập nhật danh mục thành công');
+        }
 
-    //     return redirect()->to('users');
-    // }
+        return redirect()->to('categories');
+    }
 }
