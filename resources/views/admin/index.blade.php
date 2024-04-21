@@ -16,6 +16,9 @@
   <!-- Custom fonts for this template-->
   <link href="{!! url('assets/vendor/fontawesome-free/css/all.min.css') !!}" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.snow.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
 
   <!-- Custom styles for this template-->
   <link href="{!! url('assets/css/sb-admin-2.min.css') !!}" rel="stylesheet">
@@ -56,6 +59,7 @@
         Interface
       </div>
 
+      @if(auth()->user()->role == 1)
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -68,6 +72,7 @@
           </div>
         </div>
       </li>
+      @endif
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -76,11 +81,12 @@
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ url('post') }}">Bài đăng</a>
+            <a class="collapse-item" href="{{ url('posts') }}">Bài đăng</a>
           </div>
         </div>
       </li>
 
+      @if(auth()->user()->role == 1)
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
           <i class="fas fa-fw fa-cog"></i>
@@ -92,6 +98,7 @@
           </div>
         </div>
       </li>
+      @endauth
 
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">

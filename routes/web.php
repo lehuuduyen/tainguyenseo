@@ -45,10 +45,11 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          * Categories
          */
         Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
+
         /**
-         * Post
+         * Posts
          */
-        Route::resource('post', 'PostController', ['except' => ['show']]);
+        Route::resource('posts', 'PostController', ['except' => ['show']]);
         // Route::controller(CategoriesController::class)->group(function () {
         //     Route::get('/categories', 'index');
         //     Route::get('/categories/create','create');

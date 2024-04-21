@@ -1,4 +1,5 @@
 @auth
+@if(auth()->user()->role == 1)
 @extends('admin.index')
 
 @section('main_content')
@@ -62,4 +63,5 @@
 </div>
 
 @stop
+@endif
 @endauth

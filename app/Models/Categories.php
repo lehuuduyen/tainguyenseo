@@ -42,10 +42,6 @@ class Categories extends Model
             $arr[$category->id] = $category->name;
         }
 
-        // echo "<pre>";
-        // var_dump($arr);
-        // echo "</pre>";
-        // exit;
         return $arr;
     }
 

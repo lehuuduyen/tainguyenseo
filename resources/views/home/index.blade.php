@@ -262,7 +262,6 @@ design, writing, data entry jobs and many more. Page - 1">
     <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
     <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script async="" src="https://static.hotjar.com/c/hotjar-1223449.js?sv=6"></script>
 
     <script async="" src="https://script.hotjar.com/modules.429236d560f51d186b8b.js" charset="utf-8"></script>

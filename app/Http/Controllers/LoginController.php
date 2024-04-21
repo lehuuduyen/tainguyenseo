@@ -32,7 +32,11 @@ class LoginController extends Controller
             'password' => 'required|string',
         ]);
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/admin');
+            if (Auth::user()->role == 1) {
+                return redirect()->intended('/admin');
+            } else {
+                return redirect()->intended('/posts');
+            }
         } else {
             return back()->withInput()->withErrors(['username' => 'Tên đăng nhập hoặc mật khẩu không chính xác.']);
         }
