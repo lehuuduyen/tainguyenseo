@@ -40,7 +40,7 @@
 					<tr>
 						<td> {{ $category->id }} </td>
 						<td> {{ $category->name }} </td>
-						<td> {{ $category->getParentIdAttribute()['name'] }} </td>
+						<td> {{ $category->parentCategory->name }} </td>
 						<td> {{ $category->getValueToSelectIsValidate()[$category->is_validate] }} </td>
 						<td class="text-center">
 							<form method="POST" action=" {{ route('categories.destroy', ['category' => $category->id]) }} ">
@@ -49,7 +49,7 @@
 								</a>
 								@csrf
 								@method('DELETE')
-								<button onclick="return confirm('Are you sure?')" type="submit" class="btn btn-danger btn-sm">
+								<button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" type="submit" class="btn btn-danger btn-sm">
 									<i class="fa fa-trash"></i>
 								</button>
 							</form>

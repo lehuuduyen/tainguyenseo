@@ -40,6 +40,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
         Route::get('/admin', 'AdminController@show');
+        Route::post('/upload-image', 'ImageUploadController@upload')->name('upload.image');
 
         /**
          * Categories
@@ -50,6 +51,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          * Posts
          */
         Route::resource('posts', 'PostController', ['except' => ['show']]);
+
         // Route::controller(CategoriesController::class)->group(function () {
         //     Route::get('/categories', 'index');
         //     Route::get('/categories/create','create');

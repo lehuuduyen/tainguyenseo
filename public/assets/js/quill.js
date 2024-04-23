@@ -7,7 +7,7 @@ var editorConfig = {
                 },
             ],
             ["bold", "italic", "underline", "link", "strike", "color"],
-            ["image", "code-block"],
+            ["image"],
             ["clean"],
         ],
         attachments: {
@@ -187,4 +187,6 @@ Quill.register({
     "formats/attachment": Attachment,
 });
 
-new Quill("#editor", editorConfig);
+var editor = new Quill("#editor", editorConfig);
+jQuery(".ql-editor").css("height", 200);
+

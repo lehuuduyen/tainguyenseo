@@ -319,7 +319,7 @@ design, writing, data entry jobs and many more. Page - 1">
 
                         <div
                             class="Grid-col Grid-col--12 Grid-col--desktopSmall-6 Grid-col--desktopLarge-5 PageJobs-sectionHero-ctas">
-                            <a href="/post-project" class="btn btn-primary PageJobs-sectionHero-cta">Tôi muốn Bán</a>
+                            <a href="/posts" class="btn btn-primary PageJobs-sectionHero-cta">Tôi muốn Bán</a>
 
                             <a href="/signup" rel="nofollow" class="btn btn-plain-alt PageJobs-sectionHero-cta">Tôi muốn
                                 Mua</a>

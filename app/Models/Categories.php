@@ -16,19 +16,9 @@ class Categories extends Model
 
     protected $fillable = ['name', 'slug_name', 'parent_id', 'is_validate'];
 
-    public function getParentIdAttribute()
+    public function parentCategory()
     {
-        $parentId = $this->attributes['parent_id'];
-        $parentCategory = [];
-        $parentCategory['id'] = null;
-        $parentCategory['name'] = null;
-        if (intval($parentId) > 0) {
-            $categoriesByParentId = $this->find($parentId);
-            $parentCategory['id'] = $categoriesByParentId['id'];
-            $parentCategory['name'] = $categoriesByParentId['name'];
-        }
-
-        return $parentCategory;
+        return $this->belongsTo(self::class, 'parent_id', 'id')->withDefault();;
     }
 
     /**

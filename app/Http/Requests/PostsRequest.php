@@ -24,7 +24,10 @@ class PostsRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'string|required',
+            'category_id' => 'numeric|required',
+            'description' => 'required',
+            'min_price' => 'numeric|required',
         ];
     }
 }

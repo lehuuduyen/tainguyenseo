@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categories;
 use App\Models\Posts;
 use App\Http\Requests\PostsRequest;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -30,6 +31,7 @@ class PostController extends Controller
         $this->data['categoriesList'] = Categories::arrayForSelect();
         $this->data['headline']     = 'Tạo bài đăng';
         $this->data['mode']         = 'create';
+        $this->data['button']       = 'Tạo bài đăng';
 
         return view('admin.posts.form', $this->data);
     }
@@ -42,11 +44,60 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $this->data['posts'] = Posts::arrayForSelect();
+        $this->data['post'] = Posts::findOrFail($id);
         $this->data['categoriesList'] = Categories::arrayForSelect();
         $this->data['headline']     = 'Tạo bài đăng';
-        $this->data['mode']         = 'create';
+        $this->data['mode']         = 'edit';
+        $this->data['headline']     = 'Cập nhật bài đăng';
+        $this->data['button']       = 'Chỉnh sửa bài đăng';
 
         return view('admin.posts.form', $this->data);
+    }
+
+    public function store(Request $request)
+    {
+        $formData = $request->all();
+        if (Posts::create($formData)) {
+            Session::flash('message', 'Danh mục đã được thêm thành công');
+        }
+
+        return redirect()->to('posts');
+    }
+
+    public function destroy($id)
+    {
+        if (Posts::find($id)->delete()) {
+            Session::flash('message', 'Bài đăng đã được xóa thành công');
+        }
+
+        return redirect()->to('posts');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\PostsRequest $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(PostsRequest $request, $id)
+    {
+        $data = $request->all();
+
+        $post = Posts::find($id);
+        $post->category_id = $data['category_id'];
+        $post->title = $data['title'];
+        $post->description = $data['description'];
+        $post->demo = $data['demo'];
+        $post->domain = $data['domain'];
+        $post->min_price = $data['min_price'];
+        $post->max_price = $data['max_price'];
+
+
+        if ($post->save()) {
+            Session::flash('message', 'Cập nhật bài đăng thành công');
+        }
+
+        return redirect()->to('posts');
     }
 }

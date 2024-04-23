@@ -18,10 +18,10 @@ return new class extends Migration
             $table->integer('category_id');
             $table->longText('title');
             $table->longText('description');
-            $table->longText('demo');
+            $table->longText('demo')->nullable();
             $table->string('domain', 128)->nullable();
             $table->integer('min_price');
-            $table->integer('max_price');
+            $table->integer('max_price')->nullable();
             $table->timestamps();
         });
     }

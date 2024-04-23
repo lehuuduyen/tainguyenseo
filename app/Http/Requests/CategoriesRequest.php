@@ -25,7 +25,6 @@ class CategoriesRequest extends FormRequest
     {
         return [
             'name' => 'string|required',
-            // 'slug_name' => 'string|required',
             'parent_id' => 'nullable|numeric',
             'is_validate' => 'nullable|numeric',
         ];

@@ -27,7 +27,7 @@
                 @endif
                 <div class="form-group">
                     <label for="name">Tên danh mục</label>
-                    {{ Form::text('name', NULL, [ 'class'=>'form-control', 'id' => 'name', 'placeholder' => 'Tên danh mục' ]) }}
+                    {{ Form::text('name', NULL, [ 'class'=>'form-control', 'id' => 'name', 'placeholder' => 'Tên danh mục']) }}
                 </div>
                 <div class="form-group">
                     <label for="parent_id">Danh mục phụ thuộc</label>
