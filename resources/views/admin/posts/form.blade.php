@@ -34,7 +34,11 @@
                 </div>
                 <div class="form-group">
                     <label for="parent_id">Danh mục</label>
-                    {{ Form::select('category_id', [0 => 'Chọn danh mục'] + $categoriesList, NULL, [ 'class'=>'form-control', 'id' => 'category_id', 'required' => 'required']) }}
+                    {{ Form::select('category_id', [NULL => 'Chọn danh mục'] + $categoriesList, NULL, [ 'class'=>'form-control', 'id' => 'category_id', 'required' => 'required']) }}
+                </div>
+                <div class="form-group">
+                    <label for="demo">Mô tả nhanh</label>
+                    {{ Form::textarea('demo', null, [ 'class'=>'form-control', 'id' => 'demo']) }}
                 </div>
                 <div class="form-group">
                     <label for="description">Mô tả</label>
@@ -46,10 +50,6 @@
                     <textarea style="display: none" id="description" name="description"></textarea>
                     @endif
 
-                </div>
-                <div class="form-group">
-                    <label for="demo">Demo</label>
-                    {{ Form::textarea('demo', null, [ 'class'=>'form-control', 'id' => 'demo']) }}
                 </div>
                 <div class="form-group">
                     <label>Giá cả </label>

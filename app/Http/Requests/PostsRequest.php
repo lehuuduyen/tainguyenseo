@@ -27,6 +27,7 @@ class PostsRequest extends FormRequest
             'title' => 'string|required',
             'category_id' => 'numeric|required',
             'description' => 'required',
+            'demo' => 'required',
             'min_price' => 'numeric|required',
         ];
     }

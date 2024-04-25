@@ -7,6 +7,7 @@ use App\Http\Requests\CategoriesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\AppHelper;
+use Illuminate\Support\Facades\View;
 
 class CategoriesController extends Controller
 {
@@ -93,5 +94,13 @@ class CategoriesController extends Controller
         }
 
         return redirect()->to('categories');
+    }
+
+    public function getSubCategory($categoryId)
+    {
+        $categories = Categories::where('id', $categoryId)
+            ->orWhere('parent_id', $categoryId)
+            ->get();
+        return view('home.partials.sub_categories')->with(['categories' => $categories]);
     }
 }

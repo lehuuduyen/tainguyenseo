@@ -54,7 +54,7 @@ class PostController extends Controller
         return view('admin.posts.form', $this->data);
     }
 
-    public function store(Request $request)
+    public function store(PostsRequest $request)
     {
         $formData = $request->all();
         if (Posts::create($formData)) {
@@ -99,5 +99,23 @@ class PostController extends Controller
         }
 
         return redirect()->to('posts');
+    }
+
+    public function getListByCategory($categoryId)
+    {
+        $categories = Categories::find($categoryId);
+        $postsQ = Posts::where('category_id', $categories->id);
+        if ($categories->parent_id) {
+            $postsQ->orWhere('category_id', $categories->parent_id);
+        }
+        $posts = $postsQ->get();
+        return view('home.partials.list_posts')->with(['posts' => $posts]);
+    }
+
+    public function getPostDetails($postId)
+    {
+        $this->data['post'] = Posts::findOrFail($postId);
+
+        return view('admin.posts.details', $this->data);
     }
 }

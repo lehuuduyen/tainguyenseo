@@ -19,6 +19,7 @@
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.snow.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/quill@2.0.0/dist/quill.js"></script>
+  <script src="quill-image-resize-module-master/image-resize.min.js"></script>
 
   <!-- Custom styles for this template-->
   <link href="{!! url('assets/css/sb-admin-2.min.css') !!}" rel="stylesheet">

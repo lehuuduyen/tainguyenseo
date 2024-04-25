@@ -22,6 +22,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/introduction', 'HomeController@introduction')->name('home.introduction');
     Route::get('/regulations', 'HomeController@regulations')->name('home.regulations');
+    Route::get('/posts/list/{category_id}', 'PostController@getListByCategory');
+    Route::get('/posts/details/{post_id}', 'PostController@getPostDetails');
+    Route::get('categories/get-sub-categories/{categoryId}', 'CategoriesController@getSubCategory');
 
     Route::group(['middleware' => ['guest']], function () {
         /**
@@ -50,6 +53,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         /**
          * Posts
          */
+
         Route::resource('posts', 'PostController', ['except' => ['show']]);
 
         // Route::controller(CategoriesController::class)->group(function () {

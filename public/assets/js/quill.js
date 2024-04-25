@@ -1,5 +1,8 @@
 var editorConfig = {
     modules: {
+        imageResize: {
+            displaySize: true,
+        },
         toolbar: [
             [
                 {
@@ -189,4 +192,3 @@ Quill.register({
 
 var editor = new Quill("#editor", editorConfig);
 jQuery(".ql-editor").css("height", 200);
-
