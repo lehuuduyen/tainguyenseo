@@ -44,7 +44,7 @@
                     <label for="description">Mô tả</label>
                     @if($mode == 'edit')
                     <div id="editor" name="description" id="description" required="required">{!! $post->description !!}</div>
-                    <textarea style="display: none" id="description" name="description"></textarea>
+                    <textarea style="display: none" id="description" name="description">{{ $post->description }}</textarea>
                     @else
                     <div id="editor" name="description" id="description" required="required"></div>
                     <textarea style="display: none" id="description" name="description"></textarea>
