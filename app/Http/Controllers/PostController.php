@@ -58,7 +58,7 @@ class PostController extends Controller
     {
         $formData = $request->all();
         if (Posts::create($formData)) {
-            Session::flash('message', 'Danh mục đã được thêm thành công');
+            Session::flash('message', 'Bài đăng đã được tạo thành công');
         }
 
         return redirect()->to('posts');
