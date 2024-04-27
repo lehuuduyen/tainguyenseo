@@ -22,6 +22,9 @@ class ImageUploadController extends Controller
         $originalNameImg = str_replace(['-', ' ',], '_', $request->image->getClientOriginalName());
         $imageName = time() . '_' . $originalNameImg;
         $pathImg = "images/$currentYear/$currentMonth/$currentDate/";
+        if (!file_exists($pathImg)) {
+            mkdir($pathImg, 0777, true);
+        }
         $folderPath = public_path($pathImg);
         $request->image->move($folderPath, $imageName);
 
