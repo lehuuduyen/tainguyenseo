@@ -103,4 +103,15 @@ class CategoriesController extends Controller
             ->get();
         return view('home.partials.sub_categories')->with(['categories' => $categories]);
     }
+
+    public function getParentCategory($parentCategoryId)
+    {
+        $categoriesList = Categories::all();
+        $selectedCategory = Categories::where('id', $parentCategoryId)->first();
+
+        return view('home.partials.categories_select')->with([
+            'selectedCategory' => $selectedCategory->id,
+            'categoriesList' => $categoriesList
+        ]);
+    }
 }

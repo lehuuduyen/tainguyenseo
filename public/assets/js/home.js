@@ -1,6 +1,11 @@
 jQuery(document).ready(function () {
+    var urlParams = new URLSearchParams(window.location.search);
+    var searchKeyword = urlParams.get("search_keyword");
+    var categoryParam = urlParams.get("category");
+
     var categoryId = $("select[name='categories_select']").val();
-    getCategories(categoryId);
+
+    getCategories(categoryId, searchKeyword);
 
     jQuery("select[name='categories_select']").change(function () {
         let currentCategoryVal = $(this).val();
@@ -15,7 +20,7 @@ jQuery(document).ready(function () {
     });
 });
 
-function getCategories(categoryId) {
+function getCategories(categoryId, searchKeyword) {
     jQuery.ajax({
         type: "GET",
         dataType: "html",
@@ -30,7 +35,7 @@ function getCategories(categoryId) {
                 )
                 .attr("category-id");
 
-            getListPosts(subCategoryId);
+            getListPosts(subCategoryId, searchKeyword);
 
             jQuery("li.Breadcrumbs-item.tag").on("click", function () {
                 let categoryBreadcrumbs = jQuery(this)
@@ -45,12 +50,12 @@ function getCategories(categoryId) {
     });
 }
 
-function getListPosts(categoryId) {
-    console.log(categoryId);
+function getListPosts(categoryId, searchKeyword = null) {
     jQuery.ajax({
         type: "GET",
         dataType: "html",
-        url: "/posts/list/" + categoryId,
+        // "/posts/category_id/{category_id}/search_keyword/{search_keyword}"
+        url: "/posts/category_id/" + categoryId + "/search_keyword/" + searchKeyword,
         success: function (data) {
             jQuery("#posts-list").empty();
             jQuery("#posts-list").html(data);

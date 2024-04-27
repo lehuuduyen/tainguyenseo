@@ -263,14 +263,15 @@ design, writing, data entry jobs and many more. Page - 1">
                             </li>
 
                             <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" id="breadcrumb-search-page" class="Breadcrumbs-link--last">
-                                <span itemprop="name">
+                                <span itemprop="name" class="categories-select">
                                     <select name="categories_select" id="">
                                         @foreach ($categoriesList as $category)
-                                        <option value="{{ $category->id }}">
+                                        <option value="{{ $category->id }}" {{ ( $category->id == $selectedCategory) ? 'selected' : '' }}>
                                             {{ $category->name }}
                                         </option>
                                         @endforeach
                                     </select>
+
                                 </span>
                                 <meta itemprop="position" content="4">
                             </li>
@@ -302,7 +303,7 @@ design, writing, data entry jobs and many more. Page - 1">
                                     <label id="search-label" for="keyword-input" class="is-accessibly-hidden">
                                         Tìm kiếm tài nguyên
                                     </label>
-                                    <input id="keyword-input" class="InputCombo-input xlarge-input" type="search" name="search_keyword" placeholder="Tìm kiếm bài đăng" aria-controls="search-form-error" data-uitest-target="input-keyword" value="">
+                                    <input id="keyword-input" class="InputCombo-input xlarge-input" type="search" name="search_keyword" placeholder="Tìm kiếm bài đăng" aria-controls="search-form-error" data-uitest-target="input-keyword" value="{{ $searchKeyword }}">
                                 </div>
                                 <div class="ProjectSearch-searchField-item ProjectSearch-searchField-item--onlineSearch">
                                     <span class="InputCombo-icon Icon Icon--mid">
@@ -327,7 +328,7 @@ design, writing, data entry jobs and many more. Page - 1">
 
                                     <select class="InputCombo-input xlarge-input pac-target-input js-example-basic-single" style="border: none;" name="category">
                                         @foreach ($categoriesList as $category)
-                                        <option value="{{ $category->id }}">
+                                        <option value="{{ $category->id }}" {{ ( $category->id == $selectedCategory) ? 'selected' : '' }}>
                                             {{ $category->name }}
                                         </option>
                                         @endforeach
@@ -498,7 +499,6 @@ design, writing, data entry jobs and many more. Page - 1">
                                 </div>
                                 <div class="ProjectSearch-content">
                                     <div id="posts-list" class="JobSearchCard-list">
-
                                     </div>
                                 </div>
 

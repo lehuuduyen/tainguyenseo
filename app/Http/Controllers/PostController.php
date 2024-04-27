@@ -101,14 +101,23 @@ class PostController extends Controller
         return redirect()->to('posts');
     }
 
-    public function getListByCategory($categoryId)
+    public function getListByCategory($categoryId, $searchKeyword = null)
     {
-        $categories = Categories::find($categoryId);
-        $postsQ = Posts::where('category_id', $categories->id);
-        if ($categories->parent_id) {
-            $postsQ->orWhere('category_id', $categories->parent_id);
+        $categories = Categories::where('id', $categoryId)
+            ->orWhere('parent_id', $categoryId)
+            ->get();
+        $categoryIds = $categories->pluck('id')->toArray();
+
+        $postsQ = Posts::whereIn('category_id', $categoryIds);
+
+        if ($searchKeyword && $searchKeyword != "null") {
+            $postsQ->where(function ($query) use ($searchKeyword) {
+                $query->where('title', 'LIKE', '%' . $searchKeyword . '%')
+                    ->orWhere('demo', 'LIKE', '%' . $searchKeyword . '%');
+            });
         }
         $posts = $postsQ->get();
+
         return view('home.partials.list_posts')->with(['posts' => $posts]);
     }
 
