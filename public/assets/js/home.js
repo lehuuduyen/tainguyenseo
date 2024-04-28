@@ -1,7 +1,7 @@
 jQuery(document).ready(function () {
     var urlParams = new URLSearchParams(window.location.search);
-    var searchKeyword = urlParams.get("search_keyword");
-    var categoryParam = urlParams.get("category");
+    var searchKeyword = urlParams.get("search_keyword") ? urlParams.get("search_keyword") : null;
+    var categoryParam = urlParams.get("category") ? urlParams.get("category") : null;
     var page = urlParams.get("page") ? urlParams.get("page") : 1;
 
     var categoryId = categoryParam ? categoryParam : 1;
@@ -44,7 +44,7 @@ function getCategories(categoryId, searchKeyword, page) {
     });
 }
 
-function getListPosts(categoryId, searchKeyword = null, page = 1) {
+function getListPosts(categoryId, searchKeyword = "null", page = 1) {
     jQuery.ajax({
         type: "GET",
         dataType: "html",

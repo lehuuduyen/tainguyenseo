@@ -12,7 +12,7 @@
             </select>
         </div>
         <div class="ProjectSearch-header-info">
-            <span id="total-results">5,000</span>
+            <span id="total-results">{{$total}}</span>
             <span id="keyword-results"></span> bài đăng được tìm thấy
         </div>
         <div id="filter-btn" class="ProjectSearch-header-setting">

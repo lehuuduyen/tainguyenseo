@@ -20,7 +20,7 @@ class HomeController extends Controller
             $this->data['selectedCategory'] = $categoryParam;
         }
 
-        if ($searchKeyword) {
+        if ($searchKeyword ) {
             $this->data['searchKeyword'] = $searchKeyword;
         }
 
