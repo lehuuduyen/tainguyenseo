@@ -23,7 +23,95 @@
 
   <!-- Custom styles for this template-->
   <link href="{!! url('assets/css/sb-admin-2.min.css') !!}" rel="stylesheet">
-
+  <style>
+    sup{
+    left: 5px;
+}
+.PbnGhe {
+    box-flex: 2;
+    flex-grow: 2;
+    flex-shrink: 2;
+    display: block;
+    font: 400 14px / 20px Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+    padding: 0 24px;
+    overflow-y: auto;
+}
+.fb0g6 {
+    position: relative;
+}
+.wafqxf {
+    -webkit-box-align: center;
+    box-align: center;
+    align-items: center;
+    display: flex;
+    min-height: 48px;
+}
+.W8EZA, .S1jVsd {
+    display: flex;
+}
+.qN626b {
+    background: #bdbdbd;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    /* padding: 6px; */
+    /* width: 12px; */
+    margin-right: 10px;
+    min-width: 12px;
+    font: 12px Arial, sans-serif;
+    padding: 4px 9px;
+  }
+.hTXuX {
+    color: rgba(0, 0, 0, 0.87);
+}
+.xfUKk .KHxj8b {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 15px;
+    line-height: 20px;
+    max-height: 20px;
+    min-height: 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.KHxj8b {
+    box-flex: 1;
+    flex-grow: 1;
+    flex-shrink: 1;
+    background-color: transparent;
+    border: none;
+    display: block;
+    font: 400 16px Roboto, RobotoDraft, Helvetica, Arial, sans-serif;
+    height: 24px;
+    min-height: 24px;
+    line-height: 24px;
+    margin: 0;
+    outline: none;
+    padding: 0;
+    resize: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    z-index: 0;
+    overflow-y: visible;
+    overflow-x: hidden;
+}
+.xfUKk {
+    display: block;
+    flex: 1 1 auto;
+    margin-right: 8px;
+    padding-bottom: 12px;
+}
+.gVqAvf {
+    display: flex;
+}
+.z0oSpf {
+    background-color: rgba(0, 0, 0, .12);
+    height: 1px;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+}
+    </style>
 </head>
 
 <body id="page-top">

@@ -44,6 +44,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
         Route::get('/admin', 'AdminController@show');
         Route::post('/upload-image', 'ImageUploadController@upload')->name('upload.image');
+        Route::post('/upload_domain', 'ImageUploadController@uploadDomain')->name('upload.domain');
+        Route::post('/verify', 'PostController@verify')->name('post.verify');
 
         /**
          * Categories
