@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Helpers\AppHelper;
+use App\Models\Posts;
 
 class Categories extends Model
 {
@@ -26,6 +27,16 @@ class Categories extends Model
         return $this->hasMany(Categories::class, 'parent_id', 'id');
     }
 
+    public function getAllDescendantsIds($category)
+    {
+        $ids = [];
+        foreach ($category->children as $child) {
+            $ids[] = $child->id;
+            $ids = array_merge($ids, $this->getAllDescendantsIds($child));
+        }
+        return $ids;
+    }
+
     /**
      * Getting array for select option
      **/
@@ -41,12 +52,7 @@ class Categories extends Model
     }
     public static function getAll()
     {
-        $arr = [];
         $categories = Categories::orderBy('id')->get();
-        // foreach ($categories as $category) {
-        //     $arr[$category->id] = $category->name;
-        // }
-
         return $categories;
     }
 

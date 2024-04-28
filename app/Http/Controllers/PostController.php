@@ -63,7 +63,7 @@ class PostController extends Controller
     public function store(PostsRequest $request)
     {
         $formData = $request->all();
-       
+
         if (Posts::create($formData)) {
             Session::flash('message', 'Bài đăng đã được tạo thành công');
         }
@@ -78,46 +78,45 @@ class PostController extends Controller
         $domain = $request->domain;
         $checkVerifyDomain = $this->checkVerifyDomain($domain);
         return response()->json(['status' => $checkVerifyDomain]);
-
     }
-    public function checkVerifyDomain($domain){
+    public function checkVerifyDomain($domain)
+    {
         $pass = $domain . $this->_SALT;
-        if(auth()->user()->role != 1){
-           
-            $checkSame =Posts::where('domain',$domain)->where('is_validated',1)->first();
-            if($checkSame){
+        if (auth()->user()->role != 1) {
+
+            $checkSame = Posts::where('domain', $domain)->where('is_validated', 1)->first();
+            if ($checkSame) {
                 return false;
             }
         }
 
         try {
-            $url ='https://'.$domain.'/verify.txt';
-                $getContent = file_get_contents($url);
+            $url = 'https://' . $domain . '/verify.txt';
+            $getContent = file_get_contents($url);
 
-                if (app('hash')->check($pass, $getContent)) {
-                    // The value matches the hash
-                    // Do something...
-                    return true;
-                } 
-                return false;
+            if (app('hash')->check($pass, $getContent)) {
+                // The value matches the hash
+                // Do something...
+                return true;
+            }
+            return false;
         } catch (\Throwable $th) {
             //throw $th;
             try {
-                $url ='http://'.$domain.'/verify.txt';
+                $url = 'http://' . $domain . '/verify.txt';
                 $getContent = file_get_contents($url);
 
                 if (app('hash')->check($pass, $getContent)) {
                     // The value matches the hash
                     // Do something...
                     return true;
-                } 
+                }
                 return false;
             } catch (\Throwable $th) {
                 //throw $th;
                 return false;
             }
         }
-       
     }
 
     public function destroy($id)
@@ -149,10 +148,9 @@ class PostController extends Controller
         $post->min_price = $data['min_price'];
         $post->max_price = $data['max_price'];
         $post->status = $data['status'];
-        if(!empty($data['domain'])){
+        if (!empty($data['domain'])) {
             $checkVerifyDomain = $this->checkVerifyDomain($data['domain']);
             $post->is_validated = $checkVerifyDomain;
-
         }
 
 
@@ -165,12 +163,12 @@ class PostController extends Controller
 
     public function getListByCategory($categoryId, $searchKeyword = null, $page = 1)
     {
-        $categories = Categories::where('id', $categoryId)
-            ->orWhere('parent_id', $categoryId)
-            ->get();
-        $categoryIds = $categories->pluck('id')->toArray();
+        $category = Categories::findOrFail($categoryId);
 
-        $postsQ = Posts::whereIn('category_id', $categoryIds)->where('status', 1);
+        $categoryIds  = $category->children()->pluck('id')->prepend($category->id);
+        $categoryIds = $category->getAllDescendantsIds($category);
+        $categoryIds[] = $category->id;
+        $postsQ = Posts::whereIn('category_id', $categoryIds);
 
         if ($searchKeyword && $searchKeyword != "null") {
             $postsQ->where(function ($query) use ($searchKeyword) {
@@ -178,9 +176,11 @@ class PostController extends Controller
                     ->orWhere('demo', 'LIKE', '%' . $searchKeyword . '%');
             });
         }
-        $posts = $postsQ->paginate(5, ['*'], 'page', $page);
 
-        return view('home.partials.list_posts', compact('posts', 'categoryId', 'searchKeyword', 'page'));
+        $total = $postsQ->get()->count();
+        $posts = $postsQ->paginate(10, ['*'], 'page', $page);
+
+        return view('home.partials.list_posts', compact('posts', 'categoryId', 'searchKeyword', 'page', 'total'));
     }
 
     public function getPostDetails($postId)
