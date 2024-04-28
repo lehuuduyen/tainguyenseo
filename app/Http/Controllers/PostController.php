@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
 use App\Models\Categories;
 use App\Models\Posts;
 use App\Http\Requests\PostsRequest;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -123,8 +125,13 @@ class PostController extends Controller
 
     public function getPostDetails($postId)
     {
-        $this->data['post'] = Posts::findOrFail($postId);
+        $post = Posts::findOrFail($postId);
+        $CategoriesController = new CategoriesController();
+        $parentCategories = $CategoriesController->getAllParentIds($post->category_id);
 
-        return view('admin.posts.details', $this->data);
+        return view('admin.posts.details')->with([
+            'post' => $post,
+            'parentCategories' => $parentCategories,
+        ]);
     }
 }

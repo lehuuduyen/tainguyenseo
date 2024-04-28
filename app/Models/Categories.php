@@ -16,9 +16,14 @@ class Categories extends Model
 
     protected $fillable = ['name', 'slug_name', 'parent_id', 'is_validate'];
 
-    public function parentCategory()
+    public function parent()
     {
-        return $this->belongsTo(self::class, 'parent_id', 'id')->withDefault();;
+        return $this->belongsTo(Categories::class, 'parent_id', 'id')->withDefault();
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Categories::class, 'parent_id', 'id');
     }
 
     /**

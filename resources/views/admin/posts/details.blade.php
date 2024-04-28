@@ -10272,39 +10272,16 @@
                                                     </fl-link>
                                                     <meta _ngcontent-webapp-c581="" itemprop="position" content="1">
                                                 </fl-breadcrumbs-item>
-                                                <fl-breadcrumbs-item _ngcontent-webapp-c583="" fltrackinglabel="ProjectViewLoggedOut-BreadcrumbJobs" link="/job" _nghost-webapp-c581="" data-color="inherit" data-text-transform="uppercase" data-mobile-show-breadcrumb="true" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" role="listitem">
-                                                    <fl-link _ngcontent-webapp-c581="" _nghost-webapp-c66="" data-color="inherit" data-hover-color="inherit" data-weight="bold" data-size="xxxsmall" data-display="inline"><a _ngcontent-webapp-c66="" class="LinkElement ng-star-inserted" tabindex="0" rel="" itemprop="item" itemtype="https://schema.org/Thing" data-underline="hover" data-display="inline" data-icon="false" data-icon-position="left" data-flex-direction="row" href="/job" target="_self">
-                                                            <!----><span _ngcontent-webapp-c581="" itemprop="name" class="ng-star-inserted"> Link </span>
-                                                            <!---->
-                                                        </a>
-
-                                                    </fl-link>
-                                                    <meta _ngcontent-webapp-c581="" itemprop="position" content="2">
-                                                </fl-breadcrumbs-item>
-                                                <fl-breadcrumbs-item _ngcontent-webapp-c583="" fltrackinglabel="ProjectViewLoggedOut-BreadcrumbSkill" _nghost-webapp-c581="" data-color="inherit" data-text-transform="uppercase" data-mobile-show-breadcrumb="true" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" role="listitem" class="ng-star-inserted">
-                                                    <fl-link _ngcontent-webapp-c581="" _nghost-webapp-c66="" data-color="inherit" data-hover-color="inherit" data-weight="bold" data-size="xxxsmall" data-display="inline"><a _ngcontent-webapp-c66="" class="LinkElement ng-star-inserted" tabindex="0" rel="" itemprop="item" itemtype="https://schema.org/Thing" data-underline="hover" data-display="inline" data-icon="false" data-icon-position="left" data-flex-direction="row" href="/jobs/php" target="_self">
-                                                            <!----><span _ngcontent-webapp-c581="" itemprop="name" class="ng-star-inserted"> Gues post </span>
-                                                            <!---->
-                                                        </a>
-
-                                                    </fl-link>
-                                                    <meta _ngcontent-webapp-c581="" itemprop="position" content="3">
-                                                </fl-breadcrumbs-item>
-                                                <!---->
-                                                <fl-breadcrumbs-item _ngcontent-webapp-c583="" link="./" fltrackinglabel="ProjectViewLoggedOut-BreadcrumbTitle" class="Breadcrumbs-projectTitle" _nghost-webapp-c581="" data-color="inherit" data-text-transform="uppercase" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" role="listitem">
-                                                    <fl-link _ngcontent-webapp-c581="" _nghost-webapp-c66="" data-color="inherit" data-hover-color="inherit" data-weight="bold" data-size="xxxsmall" data-display="inline"><a _ngcontent-webapp-c66="" class="LinkElement ng-star-inserted" tabindex="0" rel="" itemprop="item" itemtype="https://schema.org/Thing" data-underline="hover" data-display="inline" data-icon="false" data-icon-position="left" data-flex-direction="row" href="/projects/php/freelancer-api-approval" target="_self">
-                                                            <!----><span _ngcontent-webapp-c581="" itemprop="name" class="ng-star-inserted">
-                                                                <fl-text _ngcontent-webapp-c583="" _nghost-webapp-c41="" data-color="inherit" data-type="paragraph" data-max-lines="1" data-read-more="none" style="max-height: 20.02px; overflow: hidden;">
-                                                                    <div _ngcontent-webapp-c41="" role="paragraph" class="NativeElement ng-star-inserted" data-color="inherit" data-size="inherit" data-weight="inherit" data-style="normal" data-line-break="false">
-                                                                        {{ $post->title }}
-                                                                    </div>
-                                                                </fl-text>
-                                                            </span>
+                                                @foreach($parentCategories as $categories)
+                                                <fl-breadcrumbs-item _ngcontent-webapp-c583="" fltrackinglabel="ProjectViewLoggedOut-BreadcrumbMainSite" link="/" _nghost-webapp-c581="" data-color="inherit" data-text-transform="uppercase" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" role="listitem">
+                                                    <fl-link _ngcontent-webapp-c581="" _nghost-webapp-c66="" data-color="inherit" data-hover-color="inherit" data-weight="bold" data-size="xxxsmall" data-display="inline"><a _ngcontent-webapp-c66="" class="LinkElement ng-star-inserted" tabindex="0" rel="" itemprop="item" itemtype="https://schema.org/Thing" data-underline="hover" data-display="inline" data-icon="false" data-icon-position="left" data-flex-direction="row" href="/" target="_self">
+                                                            <!----><span _ngcontent-webapp-c581="" itemprop="name" class="ng-star-inserted"> {{ $categories->name }} </span>
                                                             <!---->
                                                         </a>
                                                     </fl-link>
-                                                    <meta _ngcontent-webapp-c581="" itemprop="position" content="4">
+                                                    <meta _ngcontent-webapp-c581="" itemprop="position" content="1">
                                                 </fl-breadcrumbs-item>
+                                                @endforeach
                                             </div>
                                         </fl-breadcrumbs>
                                     </app-project-view-logged-out-breadcrumbs>
@@ -10374,7 +10351,7 @@
                                                         <div _ngcontent-webapp-c41="" role="paragraph" class="NativeElement ng-star-inserted" data-color="foreground" data-size="xsmall" data-weight="normal" data-style="normal" data-line-break="false"> Posted <fl-relative-time _ngcontent-webapp-c585="" class="ng-star-inserted">
                                                                 <fl-text _nghost-webapp-c41="" data-color="foreground" data-type="span" data-read-more="none">
                                                                     <!----><span _ngcontent-webapp-c41="" class="NativeElement Span ng-star-inserted" data-color="foreground" data-size="xsmall" data-weight="normal" data-style="normal" data-line-break="false">
-                                                                        <!---->1 day ago
+                                                                        <!---->{{ $post->getGapTime() }}
                                                                         <!---->
                                                                         <!---->
                                                                         <!---->
@@ -10436,11 +10413,11 @@
                                         </fl-text>
                                         <div _ngcontent-webapp-c585="" data-margin-bottom="small" class="ng-star-inserted">
                                             <fl-tag _ngcontent-webapp-c585="" fltrackingsection="ProjectViewLoggedOut" fltrackinglabel="ProjectViewLoggedOut-SkillTag" _nghost-webapp-c132="" data-tag-borderless="false" data-tag-dark-mode="false" data-margin-right="xxsmall" data-margin-bottom="xxsmall" class="ng-star-inserted">
-                                                <fl-link _ngcontent-webapp-c132="" class="Tag ng-star-inserted" _nghost-webapp-c66="" data-tag-borderless="false" data-tag-color="light" data-tag-dark-mode="false" data-tag-type="clickable" data-tag-size="mid" data-color="inherit" data-hover-color="default" data-weight="inherit" data-size="xsmall" data-display="inline"><a _ngcontent-webapp-c66="" class="LinkElement ng-star-inserted" tabindex="0" rel="" data-underline="never" data-display="inline" data-icon="false" data-icon-position="left" data-flex-direction="row" href="/jobs/php" target="_self">
+                                                <fl-link _ngcontent-webapp-c132="" class="Tag ng-star-inserted" _nghost-webapp-c66="" data-tag-borderless="false" data-tag-color="light" data-tag-dark-mode="false" data-tag-type="clickable" data-tag-size="mid" data-color="inherit" data-hover-color="default" data-weight="inherit" data-size="xsmall" data-display="inline"><a _ngcontent-webapp-c66="" class="LinkElement ng-star-inserted" tabindex="0" rel="" data-underline="never" data-display="inline" data-icon="false" data-icon-position="left" data-flex-direction="row" href="/?category={{$post->category_id}}" target="_self">
                                                         <!---->
                                                         <fl-text _ngcontent-webapp-c132="" _nghost-webapp-c41="" data-color="inherit" data-type="span" data-max-lines="1" data-read-more="none" data-margin-right="none" style="max-height: inherit;" class="ng-star-inserted">
                                                             <!----><span _ngcontent-webapp-c41="" class="NativeElement Span ng-star-inserted" data-color="inherit" data-size="xsmall" data-weight="normal" data-style="normal" data-line-break="false">
-                                                                <div _ngcontent-webapp-c132="" class="Content ng-star-inserted"> Guest post </div>
+                                                                <div _ngcontent-webapp-c132="" class="Content ng-star-inserted"> {{$post->category->name}} </div>
                                                                 <!---->
                                                             </span>
                                                             <!---->

@@ -7,7 +7,7 @@ use App\Http\Requests\CategoriesRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Helpers\AppHelper;
-use Illuminate\Support\Facades\View;
+use stdClass;
 
 class CategoriesController extends Controller
 {
@@ -98,11 +98,72 @@ class CategoriesController extends Controller
 
     public function getSubCategory($categoryId)
     {
-        $categories = Categories::where('id', $categoryId)
-            ->orWhere('parent_id', $categoryId)
-            ->get();
-        return view('home.partials.sub_categories')->with(['categories' => $categories]);
+        $categoriesList = [];
+        $parentCategories = $this->getAllParentIds($categoryId);
+        $childCategories = $this->getAllChildIds($categoryId);
+
+        if (count($parentCategories) == 1) {
+            $categoriesList = Categories::where('parent_id', '==', 0)->get();
+            $categoryId = $parentCategories[0]->id;
+        } else if (empty($childCategories)) {
+            $parentCategories = array_filter($parentCategories, function ($item) use ($categoryId) {
+                return $item->id !== intval($categoryId);
+            });
+
+            $lastEle = end($parentCategories);
+            $parentCategories = $this->getAllParentIds($lastEle->id);
+            if (count($parentCategories) == 1) {
+                $categoriesList = Categories::where('parent_id', '==', 0)->get();
+            }
+            $childCategories = $this->getAllChildIds($lastEle->id);
+        }
+
+        return view('home.partials.sub_categories')->with([
+            'parentCategories' => $parentCategories,
+            'childCategories' => $childCategories,
+            'categoriesList' => $categoriesList,
+            'selectedCategory' => $categoryId,
+        ]);
     }
+
+    public function getAllParentIds($categoryId, &$parentCategories = [])
+    {
+        $category = Categories::where('id', $categoryId)
+            ->first();
+
+        if ($category) {
+            $parentObject = new stdClass();
+            $parentObject->id = $category->id;
+            $parentObject->name = $category->name;
+            array_unshift($parentCategories, $parentObject);
+
+            if ($category->parent_id !== 0) {
+                $this->getAllParentIds($category->parent_id, $parentCategories);
+            }
+        }
+        return $parentCategories;
+    }
+
+    public function getAllChildIds($categoryId, &$childCategories = [])
+    {
+        $category = Categories::where('id', $categoryId)
+            ->first();
+
+        if ($category) {
+            $children = $category->children;
+
+            foreach ($children as $child) {
+                $childObject = new stdClass();
+                $childObject->id = $child->id;
+                $childObject->name = $child->name;
+                $childCategories[] = $childObject;
+                $this->getAllChildIds($child->id, $childCategories);
+            }
+        }
+
+        return $childCategories;
+    }
+
 
     public function getParentCategory($parentCategoryId)
     {

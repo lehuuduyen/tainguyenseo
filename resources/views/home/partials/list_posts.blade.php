@@ -20,13 +20,12 @@
 
 
 
-                <a href="/posts/details/{{$post->id}}"  class="JobSearchCard-primary-heading-link" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-job" data-qtsb-label="link-project-title" data-heading-link="true">
+                <a href="/posts/details/{{$post->id}}" class="JobSearchCard-primary-heading-link" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-job" data-qtsb-label="link-project-title" data-heading-link="true">
                     {{$post->title}}
                 </a>
 
 
-                <span class="JobSearchCard-primary-heading-days">23 hours
-                    left</span>
+                <span class="JobSearchCard-primary-heading-days">{{ $post->getGapTime() }}</span>
                 <div class="JobSearchCard-primary-heading-status Tooltip--top" data-tooltip="This user has verified their Payment method">
                     <span class="Icon is-success"><svg class="Icon-image" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                             <path fill="none" d="M0 0h24v24H0z"></path>
@@ -45,15 +44,7 @@
 
             <div class="JobSearchCard-primary-tags" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-job" data-qtsb-label="link-skill">
 
-                <a class="JobSearchCard-primary-tagsLink" href="/jobs/banner-design/">Banner Design</a>
-
-                <a class="JobSearchCard-primary-tagsLink" href="/jobs/graphic-design/">Graphic Design</a>
-
-                <a class="JobSearchCard-primary-tagsLink" href="/jobs/illustrator/">Illustrator</a>
-
-                <a class="JobSearchCard-primary-tagsLink" href="/jobs/logo-design/">Logo Design</a>
-
-                <a class="JobSearchCard-primary-tagsLink" href="/jobs/photoshop/">Photoshop</a>
+                <a class="JobSearchCard-primary-tagsLink" href="/?">{{ $post->category->name }}</a>
 
             </div>
             <div class="JobSearchCard-primary-hidden">
@@ -79,7 +70,7 @@
             <div class="JobSearchCard-secondary-entry">0 entries</div>
             <div class="JobSearchCard-ctas ">
 
-                <a href="/contest/vibrant-telegram-giveaway-banner-design-2392034" class="JobSearchCard-ctas-btn btn btn-mini btn-success" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-cta-button" data-qtsb-label="enter-cta">
+                <a href="/posts/details/{{$post->id}}" class="JobSearchCard-ctas-btn btn btn-mini btn-success" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-cta-button" data-qtsb-label="enter-cta">
                     Enter now </a>
 
             </div>

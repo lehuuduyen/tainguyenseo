@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
-use App\Models\Posts;
+use App\Models\Regulation;
+use App\Models\Tools;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,17 +24,20 @@ class HomeController extends Controller
             $this->data['searchKeyword'] = $searchKeyword;
         }
 
-        $this->data['categoriesList'] = Categories::all();
+        $this->data['categoriesList'] = Categories::where('parent_id', 0)->get();
+
         return view('home.index', $this->data);
     }
 
     public function introduction()
     {
-        return view('home.introduction');
+        $this->data['tools'] = Tools::all();
+        return view('home.introduction', $this->data);
     }
 
     public function regulations()
     {
-        return view('home.regulations');
+        $this->data['rules'] = Regulation::all();
+        return view('home.regulations', $this->data);
     }
 }

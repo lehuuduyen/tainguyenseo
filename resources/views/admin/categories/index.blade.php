@@ -40,7 +40,7 @@
 					<tr>
 						<td> {{ $category->id }} </td>
 						<td> {{ $category->name }} </td>
-						<td> {{ $category->parentCategory->name }} </td>
+						<td> {{ $category->parent->name }} </td>
 						<td> {{ $category->getValueToSelectIsValidate()[$category->is_validate] }} </td>
 						<td class="text-center">
 							<form method="POST" action=" {{ route('categories.destroy', ['category' => $category->id]) }} ">

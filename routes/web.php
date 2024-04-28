@@ -50,6 +50,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          */
         Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
 
+        Route::resource('tools', 'ToolsController', ['except' => ['show']]);
+
+        Route::resource('regulations-admin', 'RegulationsController', ['except' => ['show']]);
+
+
+
         /**
          * Posts
          */

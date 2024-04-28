@@ -65,11 +65,14 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Danh mục</span>
+          <span>Thiết lập</span>
         </a>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ url('categories') }}">Danh mục</a>
+            <h6 class="collapse-header">Thiết lập</h6>
+            <a class="collapse-item {{ request()->is('categories*') ? ' active' : '' }}" href="{{ url('categories') }}">Danh mục</a>
+            <a class="collapse-item {{ request()->is('tools*') ? ' active' : '' }}" href="{{ url('tools') }}">Giới thiệu công cụ</a>
+            <a class="collapse-item {{ request()->is('regulations-admin*') ? ' active' : '' }}" href="{{ url('regulations-admin') }}">Quy định trung gian</a>
           </div>
         </div>
       </li>
@@ -223,6 +226,12 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{!! url('assets/js/sb-admin-2.min.js') !!}"></script>
+
+    <script src="{!! url('assets/vendor/datatables/jquery.dataTables.min.js') !!}"></script>
+    <script src="{!! url('assets/vendor/datatables/dataTables.bootstrap4.min.js') !!}"></script>
+
+    <script src="{!! url('assets/js/datatables-demo.js') !!}"></script>
+
 </body>
 
 </html>

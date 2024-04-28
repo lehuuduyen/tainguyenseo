@@ -253,40 +253,9 @@ design, writing, data entry jobs and many more. Page - 1">
 
             <section class="PageJobs-container">
                 <div class="PageJobs-breadCrumb Container">
-                    <nav class="Breadcrumbs">
-                        <ul itemscope="" itemtype="https://schema.org/BreadcrumbList" class="Breadcrumbs-list">
-                            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="Breadcrumbs-item">
-                                <a itemprop="item" class="Breadcrumbs-link">
-                                    <span itemprop="name">Tài nguyên</span>
-                                </a>
-                                <meta itemprop="position" content="1">
-                            </li>
-
-                            <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" id="breadcrumb-search-page" class="Breadcrumbs-link--last">
-                                <span itemprop="name" class="categories-select">
-                                    <select name="categories_select" id="">
-                                        @foreach ($categoriesList as $category)
-                                        <option value="{{ $category->id }}" {{ ( $category->id == $selectedCategory) ? 'selected' : '' }}>
-                                            {{ $category->name }}
-                                        </option>
-                                        @endforeach
-                                    </select>
-
-                                </span>
-                                <meta itemprop="position" content="4">
-                            </li>
-
-                        </ul>
-                    </nav>
                 </div>
 
-                <div class="SubCategory-breadCrumb  Container">
-                    <nav class="Breadcrumbs">
-                        <ul itemscope="" itemtype="https://schema.org/BreadcrumbList" class="Breadcrumbs-Categories-list">
-                        </ul>
-                    </nav>
 
-                </div>
 
                 <div class="Container">
                     <form id="search-form" class="ProjectSearch-searchField">
@@ -382,7 +351,9 @@ design, writing, data entry jobs and many more. Page - 1">
                                                         <div id="fixed-error" class="SectionJobFilter-alert alert alert-warning is-hidden">
                                                         </div>
                                                     </div>
-
+                                                    <div>
+                                                        <button class="btn" style="background: #139ff0; color: #F7F7F7">Tìm kiếm</button>
+                                                    </div>
 
                                                 </div>
 

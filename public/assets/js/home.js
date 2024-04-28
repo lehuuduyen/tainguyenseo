@@ -3,10 +3,12 @@ jQuery(document).ready(function () {
     var searchKeyword = urlParams.get("search_keyword");
     var categoryParam = urlParams.get("category");
 
-    var categoryId = $("select[name='categories_select']").val();
-
+    var categoryId = categoryParam ? categoryParam : 1;
+    onChangeSelect();
     getCategories(categoryId, searchKeyword);
+});
 
+function onChangeSelect() {
     jQuery("select[name='categories_select']").change(function () {
         let currentCategoryVal = $(this).val();
         let currentSubCategoryId = $(this)
@@ -16,33 +18,32 @@ jQuery(document).ready(function () {
             )
             .attr("category-id");
         getCategories(currentCategoryVal);
-        getListPosts(currentSubCategoryId);
     });
-});
-
+}
 function getCategories(categoryId, searchKeyword) {
     jQuery.ajax({
         type: "GET",
         dataType: "html",
         url: "/categories/get-sub-categories/" + categoryId,
         success: function (data) {
-            jQuery(".Breadcrumbs-Categories-list").empty();
-            jQuery(".Breadcrumbs-Categories-list").html(data);
+            jQuery(".PageJobs-breadCrumb").empty();
+            jQuery(".PageJobs-breadCrumb").html(data);
 
             let subCategoryId = $("section.PageJobs-container")
-                .find(
-                    "div.SubCategory-breadCrumb nav.Breadcrumbs ul li:first-child span"
-                )
-                .attr("category-id");
-
+                .find("input[name='selected_category']")
+                .val();
             getListPosts(subCategoryId, searchKeyword);
 
             jQuery("li.Breadcrumbs-item.tag").on("click", function () {
                 let categoryBreadcrumbs = jQuery(this)
                     .find("span")
                     .attr("category-id");
-                getListPosts(categoryBreadcrumbs);
+                console.log(categoryBreadcrumbs);
+                getCategories(categoryBreadcrumbs);
+                // getListPosts(categoryBreadcrumbs);
             });
+
+            onChangeSelect();
         },
         error: function (xhr, status, error) {
             console.error("Lỗi khi lấy thư mục:", error);
@@ -55,7 +56,11 @@ function getListPosts(categoryId, searchKeyword = null) {
         type: "GET",
         dataType: "html",
         // "/posts/category_id/{category_id}/search_keyword/{search_keyword}"
-        url: "/posts/category_id/" + categoryId + "/search_keyword/" + searchKeyword,
+        url:
+            "/posts/category_id/" +
+            categoryId +
+            "/search_keyword/" +
+            searchKeyword,
         success: function (data) {
             jQuery("#posts-list").empty();
             jQuery("#posts-list").html(data);
