@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 class ImageUploadController extends Controller
 {
+    public $_SALT = "APP_TAI_NGUYEN0778899811";
     public function upload(Request $request)
     {
         $currentYear = date('Y');
@@ -31,4 +32,18 @@ class ImageUploadController extends Controller
         // Return the URL of the uploaded image
         return response()->json(['url' => asset($pathImg . $imageName)]);
     }
+    public function uploadDomain(Request $request)
+    {
+        // Validate the uploaded file
+        $request->validate([
+            'domain' => 'required',
+        ]);
+
+        // Store the image
+        $domain = $request->domain;
+        $hash =app('hash')->make($domain . $this->_SALT);
+        // Return the URL of the uploaded image
+        return response()->json(['hash' => $hash]);
+    }
+    
 }

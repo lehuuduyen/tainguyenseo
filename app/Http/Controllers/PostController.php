@@ -17,6 +17,8 @@ class PostController extends Controller
      * 
      * @return Renderable
      */
+    public $_SALT = "APP_TAI_NGUYEN0778899811";
+
     public function index()
     {
         $this->data['posts'] = Posts::all();
@@ -30,7 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $this->data['categoriesList'] = Categories::arrayForSelect();
+        $this->data['categoriesList'] = Categories::getAll();
         $this->data['headline']     = 'Tạo bài đăng';
         $this->data['mode']         = 'create';
         $this->data['button']       = 'Tạo bài đăng';
@@ -47,7 +49,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $this->data['post'] = Posts::findOrFail($id);
-        $this->data['categoriesList'] = Categories::arrayForSelect();
+       
+        $this->data['categoriesList'] = Categories::getAll();
         $this->data['headline']     = 'Tạo bài đăng';
         $this->data['mode']         = 'edit';
         $this->data['headline']     = 'Cập nhật bài đăng';
@@ -59,11 +62,54 @@ class PostController extends Controller
     public function store(PostsRequest $request)
     {
         $formData = $request->all();
+       
         if (Posts::create($formData)) {
             Session::flash('message', 'Bài đăng đã được tạo thành công');
         }
 
         return redirect()->to('posts');
+    }
+    public function verify(Request $request)
+    {
+        $request->validate([
+            'domain' => 'required',
+        ]);
+        $domain = $request->domain;
+        $checkVerifyDomain = $this->checkVerifyDomain($domain);
+        return response()->json(['status' => $checkVerifyDomain]);
+
+    }
+    public function checkVerifyDomain($domain){
+        $pass = $domain . $this->_SALT;
+
+        try {
+            $url ='https://'.$domain.'/verify.txt';
+                $getContent = file_get_contents($url);
+
+                if (app('hash')->check($pass, $getContent)) {
+                    // The value matches the hash
+                    // Do something...
+                    return true;
+                } 
+                return false;
+        } catch (\Throwable $th) {
+            //throw $th;
+            try {
+                $url ='http://'.$domain.'/verify.txt';
+                $getContent = file_get_contents($url);
+
+                if (app('hash')->check($pass, $getContent)) {
+                    // The value matches the hash
+                    // Do something...
+                    return true;
+                } 
+                return false;
+            } catch (\Throwable $th) {
+                //throw $th;
+                return false;
+            }
+        }
+       
     }
 
     public function destroy($id)
@@ -94,6 +140,11 @@ class PostController extends Controller
         $post->domain = $data['domain'];
         $post->min_price = $data['min_price'];
         $post->max_price = $data['max_price'];
+        if(!empty($data['domain'])){
+            $checkVerifyDomain = $this->checkVerifyDomain($data['domain']);
+            $post->is_validated = $checkVerifyDomain;
+
+        }
 
 
         if ($post->save()) {

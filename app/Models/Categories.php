@@ -39,6 +39,16 @@ class Categories extends Model
 
         return $arr;
     }
+    public static function getAll()
+    {
+        $arr = [];
+        $categories = Categories::orderBy('id')->get();
+        // foreach ($categories as $category) {
+        //     $arr[$category->id] = $category->name;
+        // }
+
+        return $categories;
+    }
 
     public static function getValueToSelectIsValidate()
     {
