@@ -163,7 +163,7 @@ class PostController extends Controller
         return redirect()->to('posts');
     }
 
-    public function getListByCategory($categoryId, $searchKeyword = null)
+    public function getListByCategory($categoryId, $searchKeyword = null, $page = 1)
     {
         $categories = Categories::where('id', $categoryId)
             ->orWhere('parent_id', $categoryId)
@@ -178,9 +178,9 @@ class PostController extends Controller
                     ->orWhere('demo', 'LIKE', '%' . $searchKeyword . '%');
             });
         }
-        $posts = $postsQ->get();
+        $posts = $postsQ->paginate(5, ['*'], 'page', $page);
 
-        return view('home.partials.list_posts')->with(['posts' => $posts]);
+        return view('home.partials.list_posts', compact('posts', 'categoryId', 'searchKeyword', 'page'));
     }
 
     public function getPostDetails($postId)

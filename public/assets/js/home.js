@@ -2,25 +2,20 @@ jQuery(document).ready(function () {
     var urlParams = new URLSearchParams(window.location.search);
     var searchKeyword = urlParams.get("search_keyword");
     var categoryParam = urlParams.get("category");
+    var page = urlParams.get("page") ? urlParams.get("page") : 1;
 
     var categoryId = categoryParam ? categoryParam : 1;
     onChangeSelect();
-    getCategories(categoryId, searchKeyword);
+    getCategories(categoryId, searchKeyword, page);
 });
 
 function onChangeSelect() {
     jQuery("select[name='categories_select']").change(function () {
         let currentCategoryVal = $(this).val();
-        let currentSubCategoryId = $(this)
-            .closest("section.PageJobs-container")
-            .find(
-                "div.SubCategory-breadCrumb nav.Breadcrumbs ul li:first-child span"
-            )
-            .attr("category-id");
         getCategories(currentCategoryVal);
     });
 }
-function getCategories(categoryId, searchKeyword) {
+function getCategories(categoryId, searchKeyword, page) {
     jQuery.ajax({
         type: "GET",
         dataType: "html",
@@ -32,15 +27,13 @@ function getCategories(categoryId, searchKeyword) {
             let subCategoryId = $("section.PageJobs-container")
                 .find("input[name='selected_category']")
                 .val();
-            getListPosts(subCategoryId, searchKeyword);
+            getListPosts(subCategoryId, searchKeyword, page);
 
             jQuery("li.Breadcrumbs-item.tag").on("click", function () {
                 let categoryBreadcrumbs = jQuery(this)
                     .find("span")
                     .attr("category-id");
-                console.log(categoryBreadcrumbs);
                 getCategories(categoryBreadcrumbs);
-                // getListPosts(categoryBreadcrumbs);
             });
 
             onChangeSelect();
@@ -51,19 +44,20 @@ function getCategories(categoryId, searchKeyword) {
     });
 }
 
-function getListPosts(categoryId, searchKeyword = null) {
+function getListPosts(categoryId, searchKeyword = null, page = 1) {
     jQuery.ajax({
         type: "GET",
         dataType: "html",
-        // "/posts/category_id/{category_id}/search_keyword/{search_keyword}"
         url:
             "/posts/category_id/" +
             categoryId +
             "/search_keyword/" +
-            searchKeyword,
+            searchKeyword +
+            "/page/" +
+            page,
         success: function (data) {
-            jQuery("#posts-list").empty();
-            jQuery("#posts-list").html(data);
+            jQuery(".Post-Right").empty();
+            jQuery(".Post-Right").html(data);
         },
         error: function (xhr, status, error) {
             console.error("Lỗi khi lấy bài đăng:", error);
