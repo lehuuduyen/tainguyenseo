@@ -33,6 +33,7 @@ class PostController extends Controller
     public function create()
     {
         $this->data['categoriesList'] = Categories::getAll();
+        $this->data['status']       = Posts::statusArr();
         $this->data['headline']     = 'Tạo bài đăng';
         $this->data['mode']         = 'create';
         $this->data['button']       = 'Tạo bài đăng';
@@ -49,7 +50,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $this->data['post'] = Posts::findOrFail($id);
-       
+        $this->data['status']       = Posts::statusArr();
         $this->data['categoriesList'] = Categories::getAll();
         $this->data['headline']     = 'Tạo bài đăng';
         $this->data['mode']         = 'edit';
@@ -147,6 +148,7 @@ class PostController extends Controller
         $post->domain = $data['domain'];
         $post->min_price = $data['min_price'];
         $post->max_price = $data['max_price'];
+        $post->status = $data['status'];
         if(!empty($data['domain'])){
             $checkVerifyDomain = $this->checkVerifyDomain($data['domain']);
             $post->is_validated = $checkVerifyDomain;
@@ -168,7 +170,7 @@ class PostController extends Controller
             ->get();
         $categoryIds = $categories->pluck('id')->toArray();
 
-        $postsQ = Posts::whereIn('category_id', $categoryIds);
+        $postsQ = Posts::whereIn('category_id', $categoryIds)->where('status', 1);
 
         if ($searchKeyword && $searchKeyword != "null") {
             $postsQ->where(function ($query) use ($searchKeyword) {

@@ -18,6 +18,16 @@ class Posts extends Model
         return $this->belongsTo(Categories::class)->withDefault();
     }
 
+    public static function statusArr()
+    {
+        $arr = [
+            0 => 'Đóng bài đăng',
+            1 => 'Mở bài đăng'
+        ];
+
+        return $arr;
+    }
+
     public function getGapTime()
     {
         $createdDateTime = new DateTime($this->created_at);
@@ -26,13 +36,13 @@ class Posts extends Model
         $timeDiff = $currentDateTime->diff($createdDateTime);
 
         if ($timeDiff->days > 0) {
-            $gapTimeMessage = $timeDiff->days . " day" . ($timeDiff->days > 1 ? "s" : "") . " ago";
+            $gapTimeMessage = $timeDiff->days . " ngày trước";
         } elseif ($timeDiff->h > 0) {
-            $gapTimeMessage = $timeDiff->h . " hour" . ($timeDiff->h > 1 ? "s" : "") . " ago";
+            $gapTimeMessage = $timeDiff->h . " giờ trước";
         } elseif ($timeDiff->i > 0) {
-            $gapTimeMessage = $timeDiff->i . " minute" . ($timeDiff->i > 1 ? "s" : "") . " ago";
+            $gapTimeMessage = $timeDiff->i . " phút trước";
         } else {
-            $gapTimeMessage = "just now";
+            $gapTimeMessage = " mới nãy";
         }
         return $gapTimeMessage;
     }
