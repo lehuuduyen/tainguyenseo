@@ -81,6 +81,13 @@ class PostController extends Controller
     }
     public function checkVerifyDomain($domain){
         $pass = $domain . $this->_SALT;
+        if(auth()->user()->role != 1){
+           
+            $checkSame =Posts::where('domain',$domain)->where('is_validated',1)->first();
+            if($checkSame){
+                return false;
+            }
+        }
 
         try {
             $url ='https://'.$domain.'/verify.txt';
