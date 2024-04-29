@@ -166,7 +166,7 @@ class PostController extends Controller
     public function getListByCategory(Request $request)
     {
         $categoryId = $request->input('category_id');
-        $searchKeyword = $request->input('search_keyword');
+        $searchKeyword = json_decode($request->input('search_keyword'));
         $page = $request->input('page');
         $minPrice = $request->input('mix_price') ? (int) str_replace(",", "", $request->input('mix_price')) : null;
         $maxPrice = $request->input('max_price') ? (int) str_replace(",", "", $request->input('max_price')) : null;
@@ -186,7 +186,7 @@ class PostController extends Controller
             $postsQ->where('max_price', '<=', $maxPrice);
         }
 
-        if ($searchKeyword && $searchKeyword != "null") {
+        if ($searchKeyword) {
             $postsQ->where(function ($query) use ($searchKeyword) {
                 $query->where('title', 'LIKE', '%' . $searchKeyword . '%')
                     ->orWhere('demo', 'LIKE', '%' . $searchKeyword . '%');

@@ -10,7 +10,7 @@ jQuery(document).ready(function () {
 
     var params = {};
 
-    var categoryId = categoryParam ? categoryParam : 1;
+    var categoryId = categoryParam ? categoryParam : null;
 
     params["category_id"] = categoryId;
     params["search_keyword"] = searchKeyword;
@@ -19,7 +19,6 @@ jQuery(document).ready(function () {
     jQuery("#btn-search-price").click(function () {
         params["mix_price"] = jQuery("#fixed-min").val();
         params["max_price"] = jQuery("#fixed-max").val();
-        console.log(jQuery("#fixed-min").val());
         getCategories(params);
         getListPosts(param);
     });
@@ -27,7 +26,6 @@ jQuery(document).ready(function () {
     onChangeSelect();
     getCategories(params);
 });
-
 function onChangeSelect() {
     jQuery("select[name='categories_select']").change(function () {
         let currentCategoryVal = jQuery(this).val();

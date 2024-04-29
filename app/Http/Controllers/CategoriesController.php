@@ -99,6 +99,11 @@ class CategoriesController extends Controller
     public function getSubCategory($categoryId)
     {
         $categoriesList = [];
+        $categoryId = json_decode($categoryId);
+        if (!$categoryId) {
+            $categoryId = Categories::where('parent_id', 0)->first()->id;
+        }
+
         $parentCategories = $this->getAllParentIds($categoryId);
         $childCategories = $this->getAllChildIds($categoryId);
 
