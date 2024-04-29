@@ -203,6 +203,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
 </div>
 </div>
 </div>
+<script src="{!! url('assets/js/quill.js') !!}"></script>
 <script src="{!! url('assets/js/global.js') !!}"></script>
 <script>
     function clickVerify() {
