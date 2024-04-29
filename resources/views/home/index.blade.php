@@ -92,17 +92,17 @@
         }
     </script>
 
-    <link rel="stylesheet" href="https://www.f-cdn.com/assets/css/flux/base-8fdbe1a7.css" as="style" onload="onStylesheetLoad(this)">
+    <link rel="stylesheet" href="{!! url('assets/css/base-8fdbe1a7.css') !!}" as="style" onload="onStylesheetLoad(this)">
     <link rel="stylesheet" href="https://www.f-cdn.com/assets/compat/en/styles.4576d7b71d2c78c7.css" as="style" onload="onStylesheetLoad(this)">
 
-    <link rel="stylesheet" href="https://www.f-cdn.com/assets/css/flux/layout/PageJobs-9d096dbf.css" as="style" onload="onStylesheetLoad(this)">
+    <link rel="stylesheet" href="{!! url('assets/css/PageJobs-9d096dbf.css') !!}" as="style" onload="onStylesheetLoad(this)">
     <link rel="stylesheet" href="https://www.f-cdn.com/assets/compat/en/styles.4576d7b71d2c78c7.css" as="style" onload="onStylesheetLoad(this)">
 
     <noscript>
 
-        <link href="https://www.f-cdn.com/assets/css/flux/base-8fdbe1a7.css" type="text/css" rel="stylesheet" />
+        <link href="{!! url('assets/css/base-8fdbe1a7.css') !!}" type="text/css" rel="stylesheet" />
 
-        <link href="https://www.f-cdn.com/assets/css/flux/layout/PageJobs-9d096dbf.css" type="text/css" rel="stylesheet" />
+        <link href="{!! url('assets/css/PageJobs-9d096dbf.css') !!}" type="text/css" rel="stylesheet" />
 
         <link rel="stylesheet" href="https://www.f-cdn.com/assets/compat/en/styles.4576d7b71d2c78c7.css">
     </noscript>
@@ -254,8 +254,6 @@ design, writing, data entry jobs and many more. Page - 1">
             <section class="PageJobs-container">
                 <div class="PageJobs-breadCrumb Container">
                 </div>
-
-
 
                 <div class="Container">
                     <form id="search-form" class="ProjectSearch-searchField">
@@ -1536,6 +1534,7 @@ design, writing, data entry jobs and many more. Page - 1">
 </body>
 <script src="{!! url('assets/js/global.js') !!}"></script>
 <script src="{!! url('assets/js/home.js') !!}"></script>
+<link href="{!! url('assets/css/global.css') !!}" rel="stylesheet">
 <script>
     $(document).ready(function() {
         $('.js-example-basic-single').select2();

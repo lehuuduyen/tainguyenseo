@@ -101,27 +101,30 @@ class CategoriesController extends Controller
         $categoriesList = [];
         $categoryId = json_decode($categoryId);
         if (!$categoryId) {
-            $categoryId = Categories::where('parent_id', 0)->first()->id;
-        }
+            // Case On load page: All level 0 category will be displayed bellow
+            $childCategories = Categories::where('parent_id', '==', 0)->get();
+            $parentCategories = null;
+        } else {
+            $parentCategories = $this->getAllParentIds($categoryId);
+            $childCategories = $this->getAllChildIds($categoryId);
 
-        $parentCategories = $this->getAllParentIds($categoryId);
-        $childCategories = $this->getAllChildIds($categoryId);
-
-        if (count($parentCategories) == 1) {
-            $categoriesList = Categories::where('parent_id', '==', 0)->get();
-            $categoryId = $parentCategories[0]->id;
-        } else if (empty($childCategories)) {
-            $parentCategories = array_filter($parentCategories, function ($item) use ($categoryId) {
-                return $item->id !== intval($categoryId);
-            });
-
-            $lastEle = end($parentCategories);
-            $parentCategories = $this->getAllParentIds($lastEle->id);
             if (count($parentCategories) == 1) {
+                // Case when user click on a category but there are no child categories belonging to it
                 $categoriesList = Categories::where('parent_id', '==', 0)->get();
+                $categoryId = $parentCategories[0]->id;
+            } else if (empty($childCategories)) {
+                $parentCategories = array_filter($parentCategories, function ($item) use ($categoryId) {
+                    return $item->id !== intval($categoryId);
+                });
+                $lastEle = end($parentCategories);
+                $parentCategories = $this->getAllParentIds($lastEle->id);
+                // if (count($parentCategories) == 1) {
+                //     $categoriesList = Categories::where('parent_id', '==', 0)->get();
+                // }
+                $childCategories = $this->getAllChildIds($lastEle->id);
             }
-            $childCategories = $this->getAllChildIds($lastEle->id);
         }
+
 
         return view('home.partials.sub_categories')->with([
             'parentCategories' => $parentCategories,

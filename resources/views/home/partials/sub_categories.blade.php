@@ -8,6 +8,7 @@
                 </a>
                 <meta itemprop="position" content="1">
             </li>
+            @if(!empty($parentCategories))
             @foreach ($parentCategories as $index => $category)
             @if (!$loop->last)
             <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="Breadcrumbs-item">
@@ -32,13 +33,15 @@
             </select>
             @endif
             @endforeach
+            @endif
+
         </ul>
     </nav>
-    <div class="SubCategory-breadCrumb  Container">
+    <div class="SubCategory-breadCrumb">
         <nav class="Breadcrumbs">
             <ul itemscope="" itemtype="https://schema.org/BreadcrumbList" class="Breadcrumbs-Categories-list">
                 @foreach($childCategories as $child)
-                <li itemprop="itemListElement" itemscope="" class="Breadcrumbs-item tag" style="cursor: pointer;">
+                <li itemprop="itemListElement" itemscope="" class="Breadcrumbs-item tag">
                     <span itemprop="name" category-id="{{ $child->id }}">{{ $child->name }}</span>
                 </li>
                 @endforeach

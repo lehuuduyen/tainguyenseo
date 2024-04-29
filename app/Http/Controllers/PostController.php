@@ -172,40 +172,41 @@ class PostController extends Controller
         $maxPrice = $request->input('max_price') ? (int) str_replace(",", "", $request->input('max_price')) : null;
         $sort = $request->input('sort') ? $request->input('sort') : null;
 
-        $category = Categories::findOrFail($categoryId);
+        if ($categoryId) {
+            $category = Categories::findOrFail($categoryId);
 
-        $categoryIds  = $category->children()->pluck('id')->prepend($category->id);
-        $categoryIds = $category->getAllDescendantsIds($category);
-        $categoryIds[] = $category->id;
-        $postsQ = Posts::whereIn('category_id', $categoryIds);
+            $categoryIds  = $category->children()->pluck('id')->prepend($category->id);
+            $categoryIds = $category->getAllDescendantsIds($category);
+            $categoryIds[] = $category->id;
+            $postsQ = Posts::whereIn('category_id', $categoryIds);
 
-        if ($minPrice) {
-            $postsQ->where('min_price', '>=', $minPrice);
-        }
-
-        if ($maxPrice) {
-            $postsQ->where('max_price', '<=', $maxPrice);
-        }
-
-        if ($sort) {
-            // if ($sort == "newest") {
-            //     $postsQ->orderBy('created_at', 'DESC');
-            // }
-            if ($sort == "budget_min") {
-                $postsQ->orderBy('min_price', 'ASC');
-                $postsQ->orderBy('max_price', 'ASC');
+            if ($minPrice) {
+                $postsQ->where('min_price', '>=', $minPrice);
             }
-            if ($sort == "budget_max") {
-                $postsQ->orderBy('min_price', 'DESC');
-                $postsQ->orderBy('max_price', 'DESC');
-            }
-        }
 
-        if ($searchKeyword) {
-            $postsQ->where(function ($query) use ($searchKeyword) {
-                $query->where('title', 'LIKE', '%' . $searchKeyword . '%')
-                    ->orWhere('demo', 'LIKE', '%' . $searchKeyword . '%');
-            });
+            if ($maxPrice) {
+                $postsQ->where('max_price', '<=', $maxPrice);
+            }
+
+            if ($sort) {
+                if ($sort == "budget_min") {
+                    $postsQ->orderBy('min_price', 'ASC');
+                    $postsQ->orderBy('max_price', 'ASC');
+                }
+                if ($sort == "budget_max") {
+                    $postsQ->orderBy('min_price', 'DESC');
+                    $postsQ->orderBy('max_price', 'DESC');
+                }
+            }
+
+            if ($searchKeyword) {
+                $postsQ->where(function ($query) use ($searchKeyword) {
+                    $query->where('title', 'LIKE', '%' . $searchKeyword . '%')
+                        ->orWhere('demo', 'LIKE', '%' . $searchKeyword . '%');
+                });
+            }
+        } else {
+            $postsQ = new Posts();
         }
 
         $total = $postsQ->get()->count();
