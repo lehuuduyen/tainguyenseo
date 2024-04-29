@@ -2,11 +2,11 @@
     <div class="ProjectSearch-header">
         <div class="ProjectSearch-header-sort">
             <select id="table-sort-select" class="default-select SectionJobFilter-header-select">
-                <option value="[6,&quot;desc&quot;,&quot;newest&quot;]" selected="">Tin mới
+                <option value="[&quot;newest&quot;]" selected="">Tin mới
                     nhất</option>
-                <option value="[9,&quot;asc&quot;,&quot;budget_min&quot;]">Giá thấp nhất
+                <option value="[&quot;budget_min&quot;]">Giá thấp nhất
                 </option>
-                <option value="[9,&quot;desc&quot;,&quot;budget_max&quot;]">Giá cao nhất
+                <option value="[&quot;budget_max&quot;]">Giá cao nhất
                 </option>
 
             </select>

@@ -203,7 +203,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
 </div>
 </div>
 </div>
-<script src="{!! url('assets/js/quill.js') !!}"></script>
+<script src="{!! url('assets/js/global.js') !!}"></script>
 <script>
     function clickVerify() {
         var token = jQuery('input[name="_token"]').val();
@@ -271,17 +271,6 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
     jQuery(document).ready(function() {
         editor.on('text-change', function(delta, oldDelta, source) {
             jQuery('#description').val(editor.container.firstChild.innerHTML);
-        });
-
-        // Format currency
-        jQuery('input.currency').on('keyup', function() {
-            let parts = $(this).val().split(".");
-            let v = parts[0].replace(/\D/g, ""),
-                dec = parts[1]
-            let calc_num = Number((dec !== undefined ? v + "." + dec : v));
-            let n = new Intl.NumberFormat('en-EN').format(v);
-            n = dec !== undefined ? n + "." + dec : n;
-            jQuery(this).val(n);
         });
 
         uploadQuillImage();

@@ -339,20 +339,20 @@ design, writing, data entry jobs and many more. Page - 1">
 
                                                         <div class="Grid Grid--verticalCenter">
                                                             <div class="Grid-col Grid-col--5">
-                                                                <input id="fixed-min" class="default-input" placeholder="min">
+                                                                <input id="fixed-min" class="default-input currency" placeholder="min">
                                                             </div>
                                                             <div class="Grid-col Grid-col--2 SectionJobFilter-sliderItem-label">
                                                                 tới
                                                             </div>
                                                             <div class="Grid-col Grid-col--5">
-                                                                <input id="fixed-max" class="default-input" placeholder="max">
+                                                                <input id="fixed-max" class="default-input currency" placeholder="max">
                                                             </div>
                                                         </div>
                                                         <div id="fixed-error" class="SectionJobFilter-alert alert alert-warning is-hidden">
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <button class="btn" style="background: #139ff0; color: #F7F7F7">Tìm kiếm</button>
+                                                        <button class="btn" id="btn-search-price" style="background: #139ff0; color: #F7F7F7">Tìm kiếm</button>
                                                     </div>
 
                                                 </div>
@@ -1534,6 +1534,7 @@ design, writing, data entry jobs and many more. Page - 1">
     </div>
 
 </body>
+<script src="{!! url('assets/js/global.js') !!}"></script>
 <script src="{!! url('assets/js/home.js') !!}"></script>
 <script>
     $(document).ready(function() {

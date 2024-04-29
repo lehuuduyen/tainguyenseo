@@ -3,7 +3,7 @@
         <ul itemscope="" itemtype="https://schema.org/BreadcrumbList" class="Breadcrumbs-list">
 
             <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="Breadcrumbs-item">
-                <a itemprop="item" class="Breadcrumbs-link">
+                <a itemprop="item" href="/" class="Breadcrumbs-link">
                     <span itemprop="name">Tài nguyên</span>
                 </a>
                 <meta itemprop="position" content="1">

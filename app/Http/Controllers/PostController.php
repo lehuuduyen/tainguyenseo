@@ -163,14 +163,28 @@ class PostController extends Controller
         return redirect()->to('posts');
     }
 
-    public function getListByCategory($categoryId, $searchKeyword = null, $page = 1)
+    public function getListByCategory(Request $request)
     {
+        $categoryId = $request->input('category_id');
+        $searchKeyword = $request->input('search_keyword');
+        $page = $request->input('page');
+        $minPrice = $request->input('mix_price') ? (int) str_replace(",", "", $request->input('mix_price')) : null;
+        $maxPrice = $request->input('max_price') ? (int) str_replace(",", "", $request->input('max_price')) : null;
+
         $category = Categories::findOrFail($categoryId);
 
         $categoryIds  = $category->children()->pluck('id')->prepend($category->id);
         $categoryIds = $category->getAllDescendantsIds($category);
         $categoryIds[] = $category->id;
         $postsQ = Posts::whereIn('category_id', $categoryIds);
+
+        if ($minPrice) {
+            $postsQ->where('min_price', '>=', $minPrice);
+        }
+
+        if ($maxPrice) {
+            $postsQ->where('max_price', '<=', $maxPrice);
+        }
 
         if ($searchKeyword && $searchKeyword != "null") {
             $postsQ->where(function ($query) use ($searchKeyword) {
