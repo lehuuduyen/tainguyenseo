@@ -88,6 +88,8 @@ class PostController extends Controller
             if ($checkSame) {
                 return false;
             }
+        }else{
+            return true;
         }
 
         try {
