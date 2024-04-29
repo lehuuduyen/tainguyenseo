@@ -57,4 +57,9 @@ class Posts extends Model
     {
         $this->attributes['min_price'] = (int) str_replace(",", "", $value);
     }
+
+    public function setMaxPriceAttribute($value)
+    {
+        $this->attributes['max_price'] = (int) str_replace(",", "", $value);
+    }
 }

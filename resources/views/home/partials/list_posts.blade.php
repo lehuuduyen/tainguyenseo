@@ -1,14 +1,10 @@
 <div class="ProjectSearch-result Card">
     <div class="ProjectSearch-header">
         <div class="ProjectSearch-header-sort">
-            <select id="table-sort-select" class="default-select SectionJobFilter-header-select">
-                <option value="[&quot;newest&quot;]" selected="">Tin mới
-                    nhất</option>
-                <option value="[&quot;budget_min&quot;]">Giá thấp nhất
-                </option>
-                <option value="[&quot;budget_max&quot;]">Giá cao nhất
-                </option>
-
+            <select id="table-sort-select" name="table-sort" class="default-select SectionJobFilter-header-select">
+                <option value="newest" selected="">Tin mới nhất</option>
+                <option value="budget_min">Giá thấp nhất</option>
+                <option value="budget_max">Giá cao nhất</option>
             </select>
         </div>
         <div class="ProjectSearch-header-info">

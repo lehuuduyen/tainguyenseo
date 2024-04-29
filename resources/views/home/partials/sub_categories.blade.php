@@ -11,19 +11,23 @@
             @foreach ($parentCategories as $index => $category)
             @if (!$loop->last)
             <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" class="Breadcrumbs-item">
-                <span itemprop="name">{{ $category->name }}</span>
+                @if(request()->has('category'))
+                <a href="{{ url('/') }}&category={{$category->id}}"><span itemprop="name">{{ $category->name }}</span></a>
+                @else
+                <a href="{{ url('/') }}?category={{$category->id}}"><span itemprop="name">{{ $category->name }}</span></a>
+                @endif
             </li>
             @endif
             @if ($loop->last)
             <select name="categories_select">
                 @if(!empty($categoriesList))
-                    @foreach ($categoriesList as $cat)
-                    <option value="{{ $cat->id }}" {{ $cat->id == $selectedCategory ? 'selected' : '' }}>{{ $cat->name }}</option>
-                    @endforeach
+                @foreach ($categoriesList as $cat)
+                <option value="{{ $cat->id }}" {{ $cat->id == $selectedCategory ? 'selected' : '' }}>{{ $cat->name }}</option>
+                @endforeach
                 @else
-                    @foreach ($parentCategories as $cat)
-                    <option value="{{ $cat->id }}" {{ $loop->last ? 'selected' : '' }}>{{ $cat->name }}</option>
-                    @endforeach
+                @foreach ($parentCategories as $cat)
+                <option value="{{ $cat->id }}" {{ $loop->last ? 'selected' : '' }}>{{ $cat->name }}</option>
+                @endforeach
                 @endif
             </select>
             @endif

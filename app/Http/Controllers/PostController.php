@@ -88,7 +88,7 @@ class PostController extends Controller
             if ($checkSame) {
                 return false;
             }
-        }else{
+        } else {
             return true;
         }
 
@@ -170,6 +170,7 @@ class PostController extends Controller
         $page = $request->input('page');
         $minPrice = $request->input('mix_price') ? (int) str_replace(",", "", $request->input('mix_price')) : null;
         $maxPrice = $request->input('max_price') ? (int) str_replace(",", "", $request->input('max_price')) : null;
+        $sort = $request->input('sort') ? $request->input('sort') : null;
 
         $category = Categories::findOrFail($categoryId);
 
@@ -186,6 +187,20 @@ class PostController extends Controller
             $postsQ->where('max_price', '<=', $maxPrice);
         }
 
+        if ($sort) {
+            // if ($sort == "newest") {
+            //     $postsQ->orderBy('created_at', 'DESC');
+            // }
+            if ($sort == "budget_min") {
+                $postsQ->orderBy('min_price', 'ASC');
+                $postsQ->orderBy('max_price', 'ASC');
+            }
+            if ($sort == "budget_max") {
+                $postsQ->orderBy('min_price', 'DESC');
+                $postsQ->orderBy('max_price', 'DESC');
+            }
+        }
+
         if ($searchKeyword) {
             $postsQ->where(function ($query) use ($searchKeyword) {
                 $query->where('title', 'LIKE', '%' . $searchKeyword . '%')
@@ -194,7 +209,7 @@ class PostController extends Controller
         }
 
         $total = $postsQ->get()->count();
-        $posts = $postsQ->paginate(10, ['*'], 'page', $page);
+        $posts = $postsQ->orderBy('created_at', 'DESC')->paginate(10, ['*'], 'page', $page);
 
         return view('home.partials.list_posts', compact('posts', 'categoryId', 'searchKeyword', 'page', 'total'));
     }

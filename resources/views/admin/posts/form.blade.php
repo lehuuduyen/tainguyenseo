@@ -100,9 +100,9 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
                     <br>
                     <div class="col-md-6" style="display: ruby;">
                         <label for="min_price" class="col-md-2">Từ : <sup style="color:red">* </sup></label>
-                        {{ Form::text('min_price', null, ['class' => 'form-control currency', 'id' => 'min_price', 'style' => 'max-width: 30%;', 'required' => 'required']) }}
+                        {{ Form::text('min_price', isset($post->min_price) ? number_format($post->min_price, 0, '', ',') : null, ['class' => 'form-control currency', 'id' => 'min_price', 'style' => 'max-width: 30%;']) }}
                         <label for="max_price" class="col-md-2">Đến: </label>
-                        {{ Form::text('max_price', null, ['class' => 'form-control currency', 'id' => 'max_price', 'style' => 'max-width: 30%;']) }}
+                        {{ Form::text('max_price', isset($post->max_price) ? number_format($post->max_price, 0, '', ',') : null, ['class' => 'form-control currency', 'id' => 'max_price', 'style' => 'max-width: 30%;']) }}
                     </div>
 
                 </div>

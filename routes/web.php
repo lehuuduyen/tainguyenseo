@@ -24,7 +24,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/regulations', 'HomeController@regulations')->name('home.regulations');
     Route::get('/posts-list', 'PostController@getListByCategory');
     Route::get('/posts/details/{post_id}', 'PostController@getPostDetails');
-    Route::get('categories/get-sub-categories/{categoryId}', 'CategoriesController@getSubCategory');
+    Route::get('categories/get-sub-categories/{categoryId?}', 'CategoriesController@getSubCategory');
 
     Route::group(['middleware' => ['guest']], function () {
         /**

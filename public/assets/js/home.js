@@ -80,6 +80,12 @@ function getListPosts(params) {
         success: function (data) {
             jQuery(".Post-Right").empty();
             jQuery(".Post-Right").html(data);
+
+            jQuery("select[name='table-sort']").change(function () {
+                let sortVal = jQuery(this).find(":selected").val();
+                params["sort"] = sortVal;
+                getListPosts(params);
+            });
         },
         error: function (xhr, status, error) {
             console.error("Lỗi khi lấy bài đăng:", error);
