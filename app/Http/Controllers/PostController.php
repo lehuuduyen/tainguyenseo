@@ -21,7 +21,12 @@ class PostController extends Controller
 
     public function index()
     {
-        $this->data['posts'] = Posts::all();
+        if (auth()->user()->role == 1) {
+            $this->data['posts'] = Posts::all();
+        } else {
+
+            $this->data['posts'] = Posts::where('created_by', auth()->user()->id)->get();
+        }
         return view('admin.posts.index', $this->data);
     }
 
@@ -50,6 +55,10 @@ class PostController extends Controller
     public function edit($id)
     {
         $this->data['post'] = Posts::findOrFail($id);
+
+        if ((auth()->user()->role != 1) && $this->data['post']->created_by != auth()->user()->id) {
+            abort(404);
+        }
         $this->data['status']       = Posts::statusArr();
         $this->data['categoriesList'] = Categories::getAll();
         $this->data['headline']     = 'Tạo bài đăng';
@@ -63,6 +72,7 @@ class PostController extends Controller
     public function store(PostsRequest $request)
     {
         $formData = $request->all();
+        $formData["created_by"] = auth()->user()->id;
 
         if (Posts::create($formData)) {
             Session::flash('message', 'Bài đăng đã được tạo thành công');
@@ -123,7 +133,11 @@ class PostController extends Controller
 
     public function destroy($id)
     {
-        if (Posts::find($id)->delete()) {
+        $post = Posts::find($id);
+        if ((auth()->user()->role != 1) && $post->created_by != auth()->user()->id) {
+            abort(404);
+        }
+        if ($post->delete()) {
             Session::flash('message', 'Bài đăng đã được xóa thành công');
         }
 
