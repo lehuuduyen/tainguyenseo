@@ -50,6 +50,7 @@
                                 {{$post->title}}
                             </a>
                             <span class="JobSearchCard-primary-heading-days">{{ $post->getGapTime() }}</span>
+                            @if ($post->is_prestige)
                             <div class="JobSearchCard-primary-heading-status Tooltip--top" data-tooltip="This user has verified their Payment method">
                                 <span class="Icon is-success"><svg class="Icon-image" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                         <path fill="none" d="M0 0h24v24H0z"></path>
@@ -59,6 +60,7 @@
                                         </g>
                                     </svg></span> UY TÍN
                             </div>
+                            @endif
 
                         </div>
 

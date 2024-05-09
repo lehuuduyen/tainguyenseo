@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DateTime;
 use App\Models\Categories;
 use App\Models\Posts;
+use App\Models\User;
 use App\Http\Requests\PostsRequest;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CategoriesController;
@@ -18,10 +19,21 @@ class PostController extends Controller
      * @return Renderable
      */
     public $_SALT = "APP_TAI_NGUYEN0778899811";
+    protected $currentUser;
+    protected $isAdmin;
+
+    public function callAction($method, $parameters)
+    {
+        $this->currentUser = auth()->user();
+        $this->isAdmin = (auth()->user()->role == 1) ? true : false;
+
+        return parent::callAction($method, $parameters);
+    }
+
 
     public function index()
     {
-        if (auth()->user()->role == 1) {
+        if ($this->isAdmin == 1) {
             $this->data['posts'] = Posts::all();
         } else {
 
@@ -56,7 +68,7 @@ class PostController extends Controller
     {
         $this->data['post'] = Posts::findOrFail($id);
 
-        if ((auth()->user()->role != 1) && $this->data['post']->created_by != auth()->user()->id) {
+        if ((!$this->isAdmin) && ($this->data['post']->created_by != $this->currentUser->id)) {
             abort(404);
         }
         $this->data['status']       = Posts::statusArr();
@@ -73,6 +85,9 @@ class PostController extends Controller
     {
         $formData = $request->all();
         $formData["created_by"] = auth()->user()->id;
+        if ($this->isAdmin) {
+            $formData["is_prestige"] = 1;
+        }
 
         if (Posts::create($formData)) {
             Session::flash('message', 'Bài đăng đã được tạo thành công');
@@ -134,7 +149,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Posts::find($id);
-        if ((auth()->user()->role != 1) && $post->created_by != auth()->user()->id) {
+        if ((!$this->isAdmin) && ($post->created_by != $this->currentUser->id)) {
             abort(404);
         }
         if ($post->delete()) {
@@ -154,8 +169,12 @@ class PostController extends Controller
     public function update(PostsRequest $request, $id)
     {
         $data = $request->all();
+        $currentUser = $this->currentUser;
 
         $post = Posts::find($id);
+        $createdBy = User::where('id', $post->created_by)->first();
+        $createdByAdmin = $createdBy->role;
+
         $post->category_id = $data['category_id'];
         $post->title = $data['title'];
         $post->description = $data['description'];
@@ -164,6 +183,14 @@ class PostController extends Controller
         $post->min_price = $data['min_price'];
         $post->max_price = $data['max_price'];
         $post->status = $data['status'];
+        if ($this->isAdmin) {
+            if (isset($data['is_prestige']) && !$createdByAdmin) {
+                $post->is_prestige = 1;
+            } else {
+                $post->is_prestige = 0;
+            }
+        }
+
         if (!empty($data['domain'])) {
             $checkVerifyDomain = $this->checkVerifyDomain($data['domain']);
             $post->is_validated = $checkVerifyDomain;

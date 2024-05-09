@@ -110,6 +110,13 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
                     <label for="is_validate">Trạng thái: </label>
                     {{ Form::select('status', $status, NULL, [ 'class'=>'form-control', 'id' => 'status']) }}
                 </div>
+                @if((auth()->user()->role == 1) && $mode == 'edit' && $post->created_by != auth()->user()->id)
+                <div class="form-group">
+                    <label for="is_prestige">Uy tín: </label>
+                    {!! Form::checkbox('is_prestige[]', false, ($post->is_prestige), [ 'id' => 'is_prestige']) !!}
+                </div>
+                @endif
+
                 <button type="submit" class="btn btn-primary">{{ $button }}</button>
                 {!! Form::close() !!}
             </div>
