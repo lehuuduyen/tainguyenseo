@@ -33,7 +33,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
                 <div class="form-group">
                     <label for="name">Tên bài đăng<sup style="color:red">*</sup>
                     </label>
-                    {{ Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Tên danh mục', 'required' => 'required']) }}
+                    {{ Form::text('title', null, ['class' => 'form-control', 'id' => 'title', 'placeholder' => 'Tên bài đăng', 'required' => 'required']) }}
                 </div>
                 {{-- @if (auth()->user()->role == 1) --}}
 

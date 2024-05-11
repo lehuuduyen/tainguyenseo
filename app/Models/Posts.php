@@ -18,6 +18,11 @@ class Posts extends Model
         return $this->belongsTo(Categories::class)->withDefault();
     }
 
+    public function createdUser()
+    {
+        return $this->hasOne(User::class, "id", "created_by");
+    }
+
     public static function statusArr()
     {
         $arr = [

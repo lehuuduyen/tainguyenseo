@@ -7,6 +7,7 @@ jQuery(document).ready(function () {
         ? urlParams.get("category")
         : null;
     var page = urlParams.get("page") ? urlParams.get("page") : 1;
+    var createdUser = urlParams.get("created_user") ? urlParams.get("created_user") : null;
 
     var params = {};
 
@@ -15,12 +16,13 @@ jQuery(document).ready(function () {
     params["category_id"] = categoryId;
     params["search_keyword"] = searchKeyword;
     params["page"] = page;
+    params["created_user"] = createdUser;
 
     jQuery("#btn-search-price").click(function () {
         params["mix_price"] = jQuery("#fixed-min").val();
         params["max_price"] = jQuery("#fixed-max").val();
         getCategories(params);
-        getListPosts(param);
+        getListPosts(params);
     });
 
     onChangeSelect();

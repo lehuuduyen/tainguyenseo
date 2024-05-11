@@ -96,7 +96,7 @@ class CategoriesController extends Controller
         return redirect()->to('categories');
     }
 
-    public function getSubCategory($categoryId)
+    public function getSubCategory($categoryId = null)
     {
         $categoriesList = [];
         $categoryId = json_decode($categoryId);

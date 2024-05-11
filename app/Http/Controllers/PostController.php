@@ -25,7 +25,9 @@ class PostController extends Controller
     public function callAction($method, $parameters)
     {
         $this->currentUser = auth()->user();
-        $this->isAdmin = (auth()->user()->role == 1) ? true : false;
+        if ($this->currentUser) {
+            $this->isAdmin = (auth()->user()->role == 1) ? true : false;
+        }
 
         return parent::callAction($method, $parameters);
     }
@@ -207,7 +209,9 @@ class PostController extends Controller
     public function getListByCategory(Request $request)
     {
         $categoryId = $request->input('category_id');
-        $searchKeyword = json_decode($request->input('search_keyword'));
+        $createdUser = $request->input('created_user');
+        $searchKeyword = $request->input('search_keyword') ? ($request->input('search_keyword')) : null;
+
         $page = $request->input('page');
         $minPrice = $request->input('mix_price') ? (int) str_replace(",", "", $request->input('mix_price')) : null;
         $maxPrice = $request->input('max_price') ? (int) str_replace(",", "", $request->input('max_price')) : null;
@@ -220,34 +224,38 @@ class PostController extends Controller
             $categoryIds = $category->getAllDescendantsIds($category);
             $categoryIds[] = $category->id;
             $postsQ = Posts::whereIn('category_id', $categoryIds);
-
-            if ($minPrice) {
-                $postsQ->where('min_price', '>=', $minPrice);
-            }
-
-            if ($maxPrice) {
-                $postsQ->where('max_price', '<=', $maxPrice);
-            }
-
-            if ($sort) {
-                if ($sort == "budget_min") {
-                    $postsQ->orderBy('min_price', 'ASC');
-                    $postsQ->orderBy('max_price', 'ASC');
-                }
-                if ($sort == "budget_max") {
-                    $postsQ->orderBy('min_price', 'DESC');
-                    $postsQ->orderBy('max_price', 'DESC');
-                }
-            }
-
-            if ($searchKeyword) {
-                $postsQ->where(function ($query) use ($searchKeyword) {
-                    $query->where('title', 'LIKE', '%' . $searchKeyword . '%')
-                        ->orWhere('demo', 'LIKE', '%' . $searchKeyword . '%');
-                });
-            }
         } else {
-            $postsQ = new Posts();
+            $postsQ = Posts::query();
+        }
+
+        if ($minPrice) {
+            $postsQ->where('min_price', '>=', $minPrice);
+        }
+
+        if ($maxPrice) {
+            $postsQ->where('max_price', '<=', $maxPrice);
+        }
+
+        if ($sort) {
+            if ($sort == "budget_min") {
+                $postsQ->orderBy('min_price', 'ASC');
+                $postsQ->orderBy('max_price', 'ASC');
+            }
+            if ($sort == "budget_max") {
+                $postsQ->orderBy('min_price', 'DESC');
+                $postsQ->orderBy('max_price', 'DESC');
+            }
+        }
+
+        if ($searchKeyword) {
+            $postsQ->where(function ($query) use ($searchKeyword) {
+                $query->where('title', 'LIKE', '%' . $searchKeyword . '%')
+                    ->orWhere('demo', 'LIKE', '%' . $searchKeyword . '%');
+            });
+        }
+
+        if ($createdUser) {
+            $postsQ->where("created_by", $createdUser);
         }
 
         $total = $postsQ->get()->count();
