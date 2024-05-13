@@ -33,9 +33,14 @@
             <div class="JobSearchCard-item ">
                 <div class="JobSearchCard-item-inner" data-project-card="true">
                     <div class="JobSearchCard-primary">
-                        <div class="JobSearchCard-primary-heading">
+                    <div class="JobSearchCard-primary-tags" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-job" data-qtsb-label="link-skill">
 
-                            <span class="Icon JobSearchCard-primary-heading-Icon">
+<a class="JobSearchCard-primary-tagsLink" href="/?category={{ $post->category->id }}">{{ $post->category->name }}</a>
+
+</div>
+                        <div class="JobSearchCard-primary-heading" style="display:flex">
+
+                            <!-- <span class="Icon JobSearchCard-primary-heading-Icon">
                                 <svg viewBox="0 0 24 24" class="flicon-trophy">
                                     <g fill="none">
                                         <title>Trophy icon</title>
@@ -45,13 +50,39 @@
                                         </path>
                                     </g>
                                 </svg>
-                            </span>
+                            </span> -->
+                            
+                            <div class="JobSearchCard-primary-tags" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-job" data-qtsb-label="link-skill">
+
                             <a href="/posts/details/{{$post->id}}" class="JobSearchCard-primary-heading-link" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-job" data-qtsb-label="link-project-title" data-heading-link="true">
-                                {{$post->title}}
+                                {{($post->is_validated ==1)?$post->domain:$post->title}} | 
                             </a>
-                            <span class="JobSearchCard-primary-heading-days">{{ $post->getGapTime() }}</span>
+                            
+                            </div>
+                           
+
+                                <div class="JobSearchCard-primary-price">
+                                {{ number_format($post->min_price, 0, '', '.') }} đ
+                                @if(!empty($post->max_price))
+                                - {{ number_format($post->max_price, 0, '', '.') }} đ
+                                @endif
+                                </div>
+
+                        </div>
+                        @if ($post->is_validated  == 1)
+                            <div class="JobSearchCard-primary-heading-status Tooltip--top" style="color:blue;margin-right: 10px;margin-bottom: 10px;" data-tooltip="This user has verified their Payment method">
+                                <span class="Icon " style="fill:blue"><svg class="Icon-image" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="none" d="M0 0h24v24H0z"></path>
+                                        <g>
+                                            <path d="M20 2c0-1.104-.896-2-2-2H2C.897 0 0 .896 0 2v2h20V2zM19 14c.34 0 .668.036.99.09.002-.03.01-.06.01-.09V6H0v8c0 1.102.897 2 2 2h12.537c1.1-1.225 2.69-2 4.463-2zM8 13H3v-2h5v2zm2-3H3V8h7v2zm3-2h4v2h-4V8zM22.293 16.293L18 20.587l-2.293-2.294-1.414 1.413L18 23.416l5.707-5.71">
+                                            </path>
+                                        </g>
+                                    </svg></span> Verified
+                            </div>
+                            @endif
+
                             @if ($post->is_prestige)
-                            <div class="JobSearchCard-primary-heading-status Tooltip--top" data-tooltip="This user has verified their Payment method">
+                            <div class="JobSearchCard-primary-heading-status Tooltip--top" style="margin-bottom: 10px;" data-tooltip="This user has verified their Payment method">
                                 <span class="Icon is-success"><svg class="Icon-image" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                         <path fill="none" d="M0 0h24v24H0z"></path>
                                         <g>
@@ -61,30 +92,18 @@
                                     </svg></span> UY TÍN
                             </div>
                             @endif
-
-                        </div>
-
                         <p class="JobSearchCard-primary-description">
                             {{$post->demo}}
                         </p>
 
-                        <div class="JobSearchCard-primary-tags" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-job" data-qtsb-label="link-skill">
+                       
+                      
+                        <span class="JobSearchCard-primary-heading-days">{{ $post->getGapTime() }}</span>
 
-                            <a class="JobSearchCard-primary-tagsLink" href="/?category={{ $post->category->id }}">{{ $post->category->name }}</a>
-
-                        </div>
-                        <div class="JobSearchCard-primary-hidden">
-
-                            <div class="JobSearchCard-primary-price">
-                                $47
-                                <span class="JobSearchCard-primary-avgBid">(Avg Bid)</span>
-                            </div>
-
-                        </div>
-                        <div class="JobSearchCard-primary-promotion">
+                        <!-- <div class="JobSearchCard-primary-promotion">
                             <span class="promotion-tag promotion-guaranteed JobSearchCard-primary-promotion-tag">Đảm
                                 bảo</span>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="JobSearchCard-secondary">
                         <div class="JobSearchCard-secondary-price">
@@ -93,7 +112,6 @@
                             - {{ number_format($post->max_price, 0, '', '.') }} đ
                             @endif
                         </div>
-                        <div class="JobSearchCard-secondary-entry">0 entries</div>
                         <div class="JobSearchCard-secondary-entry">Người đăng: <br>
                             <a href="/?created_user={{$post->createdUser->id}}">
                                 {{$post->createdUser->username}}
