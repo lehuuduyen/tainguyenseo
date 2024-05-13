@@ -96,7 +96,11 @@
                             {{$post->demo}}
                         </p>
 
-                       
+                        <div class="JobSearchCard-primary-heading-days">Người đăng:
+                            <a href="/?created_user={{$post->createdUser->id}}">
+                                {{$post->createdUser->username}}
+                            </a>
+                        </div>
                       
                         <span class="JobSearchCard-primary-heading-days">{{ $post->getGapTime() }}</span>
 
@@ -111,11 +115,6 @@
                             @if(!empty($post->max_price))
                             - {{ number_format($post->max_price, 0, '', '.') }} đ
                             @endif
-                        </div>
-                        <div class="JobSearchCard-secondary-entry">Người đăng: <br>
-                            <a href="/?created_user={{$post->createdUser->id}}">
-                                {{$post->createdUser->username}}
-                            </a>
                         </div>
                         <div class="JobSearchCard-ctas ">
                             <a href="/posts/details/{{$post->id}}" class="JobSearchCard-ctas-btn btn btn-mini btn-success" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-cta-button" data-qtsb-label="enter-cta">

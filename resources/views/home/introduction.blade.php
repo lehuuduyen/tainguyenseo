@@ -45,6 +45,11 @@
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="x-dns-prefetch-control" content="on">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="title" content="title">
+    <meta name="description" content="description">
+    <meta name="keywords" content="title|domain">
+
     <title>Freelance Jobs and Contests | Freelancer</title>
     <link rel="preconnect" href="//www.f-cdn.com" crossorigin="">
     <!-- <link rel="dns-prefetch" href="style.css"> -->
