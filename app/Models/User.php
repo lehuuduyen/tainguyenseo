@@ -43,4 +43,14 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($value);
     }
+
+    public static function roleName()
+    {
+        $arr = [
+            0 => 'Admin',
+            1 => 'Nhà cung cấp'
+        ];
+
+        return $arr;
+    }
 }

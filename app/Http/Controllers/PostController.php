@@ -215,12 +215,12 @@ class PostController extends Controller
         $page = $request->input('page');
         $minPrice = $request->input('mix_price') ? (int) str_replace(",", "", $request->input('mix_price')) : null;
         $maxPrice = $request->input('max_price') ? (int) str_replace(",", "", $request->input('max_price')) : null;
-        $sort = $request->input('sort') ? $request->input('sort') : null;
+        $sort = $request->input('sort') ? $request->input('sort') : "newest";
 
         if ($categoryId) {
             $category = Categories::findOrFail($categoryId);
 
-            $categoryIds  = $category->children()->pluck('id')->prepend($category->id);
+            $categoryIds = $category->children()->pluck('id')->prepend($category->id);
             $categoryIds = $category->getAllDescendantsIds($category);
             $categoryIds[] = $category->id;
             $postsQ = Posts::whereIn('category_id', $categoryIds);
@@ -236,15 +236,16 @@ class PostController extends Controller
             $postsQ->where('max_price', '<=', $maxPrice);
         }
 
-        if ($sort) {
-            if ($sort == "budget_min") {
-                $postsQ->orderBy('min_price', 'ASC');
-                $postsQ->orderBy('max_price', 'ASC');
-            }
-            if ($sort == "budget_max") {
-                $postsQ->orderBy('min_price', 'DESC');
-                $postsQ->orderBy('max_price', 'DESC');
-            }
+        if ($sort == "budget_min") {
+            $postsQ->orderBy('min_price', 'ASC');
+            $postsQ->orderBy('max_price', 'ASC');
+        }
+        if ($sort == "budget_max") {
+            $postsQ->orderBy('min_price', 'DESC');
+            $postsQ->orderBy('max_price', 'DESC');
+        }
+        if ($sort == "newest") {
+            $postsQ->orderBy('created_at', 'DESC');
         }
 
         if ($searchKeyword) {
@@ -259,9 +260,16 @@ class PostController extends Controller
         }
 
         $total = $postsQ->get()->count();
-        $posts = $postsQ->orderBy('created_at', 'DESC')->paginate(10, ['*'], 'page', $page);
+        $posts = $postsQ->paginate(10, ['*'], 'page', $page);
 
-        return view('home.partials.list_posts', compact('posts', 'categoryId', 'searchKeyword', 'page', 'total'));
+        return view('home.partials.list_posts', compact(
+            'posts',
+            'categoryId',
+            'searchKeyword',
+            'page',
+            'total',
+            'sort'
+        ));
     }
 
     public function getPostDetails($postId)

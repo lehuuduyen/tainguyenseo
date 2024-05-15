@@ -2,9 +2,9 @@
     <div class="ProjectSearch-header">
         <div class="ProjectSearch-header-sort">
             <select id="table-sort-select" name="table-sort" class="default-select SectionJobFilter-header-select">
-                <option value="newest" selected="">Tin mới nhất</option>
-                <option value="budget_min">Giá thấp nhất</option>
-                <option value="budget_max">Giá cao nhất</option>
+                <option value="newest" {{ $sort == 'newest' ? 'selected' : '' }}>Tin mới nhất</option>
+                <option value="budget_min" {{ $sort == 'budget_min' ? 'selected' : '' }}>Giá thấp nhất</option>
+                <option value="budget_max" {{ $sort == 'budget_max' ? 'selected' : '' }}>Giá cao nhất</option>
             </select>
         </div>
         <div class="ProjectSearch-header-info">
@@ -12,18 +12,6 @@
             <span id="keyword-results"></span> bài đăng được tìm thấy
         </div>
         <div id="filter-btn" class="ProjectSearch-header-setting">
-            <span class="InputCombo-icon Icon Icon--mid">
-                <svg class="Icon-image" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="none" d="M0 0h24v24H0z"></path>
-                    <g>
-                        <path d="M14.5 6c0-.346.047-.678.12-1H2v2h12.62c-.073-.324-.12-.656-.12-1zM14.5 18c0-.346.047-.678.12-1H2v2h12.62c-.073-.324-.12-.656-.12-1zM4.5 12c0-.346.047-.678.12-1H2v2h2.62c-.073-.324-.12-.656-.12-1zM13.38 11c.073.322.12.654.12 1 0 .344-.047.676-.12 1H22v-2h-8.62z">
-                        </path>
-                        <circle cx="19" cy="5.999" r="3"></circle>
-                        <circle cx="9" cy="11.999" r="3"></circle>
-                        <circle cx="19" cy="17.999" r="3"></circle>
-                    </g>
-                </svg>
-            </span>
         </div>
         {{ $posts->withPath('/')->appends(['category' => $categoryId, 'search_keyword' => $searchKeyword])->links('pagination') }}
     </div>

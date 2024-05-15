@@ -186,7 +186,7 @@
         </a>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="{{ url('categories') }}">Danh sách user</a>
+            <a class="collapse-item" href="{{ url('users') }}">Danh sách user</a>
           </div>
         </div>
       </li>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\RssFeedController;
 use Illuminate\Http\Request;
 
 /*
@@ -24,7 +25,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     Route::get('/regulations', 'HomeController@regulations')->name('home.regulations');
     Route::get('/posts-list', 'PostController@getListByCategory');
     Route::get('/posts/details/{post_id}', 'PostController@getPostDetails');
-    Route::get('categories/get-sub-categories/{categoryId?}', 'CategoriesController@getSubCategory');
+    Route::get('/categories/get-sub-categories/{categoryId?}', 'CategoriesController@getSubCategory');
+
+    Route::get('rss/posts.rss', [RssFeedController::class, 'index']);
+    Route::get('rss/{post_id}/posts-details.rss', [RssFeedController::class, 'detail']);
 
     Route::group(['middleware' => ['guest']], function () {
         /**
@@ -47,9 +51,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
         Route::post('/upload_domain', 'ImageUploadController@uploadDomain')->name('upload.domain');
         Route::post('/verify', 'PostController@verify')->name('post.verify');
 
-        /**
-         * Categories
-         */
+        Route::resource('users', 'UsersController', ['except' => ['show']]);
+
         Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
 
         Route::resource('tools', 'ToolsController', ['except' => ['show']]);
