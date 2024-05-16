@@ -112,40 +112,6 @@
 
 
 
-
-
-    <meta name="description" content="Browse jobs and contests on Freelancer. Find programming, web development,
-design, writing, data entry jobs and many more. Page - 1">
-
-
-    <meta property="og:title" content=" Jobs, Employment | Freelancer">
-    <meta property="og:description" content="Browse jobs and contests on Freelancer. Find programming, web development,
-design, writing, data entry jobs and many more. Page - 1">
-
-    <meta property="og:image" content="https://www.f-cdn.com/assets/img/facebook/share-make-it-real-thumbnail-1200x630-221e3b45.jpg">
-
-
-    <link rel="canonical" href="https://www.freelancer.com/jobs">
-    <meta name="robots" content="index, follow">
-
-
-
-    <meta name="robots" content="noodp">
-    <meta name="verify-v1" content="TTmFSxUJxXuHsKl9kPGeYetHBfsjnO7s87WxaAha8NE=">
-    <meta name="verify-v1" content="9ejzgFxg7wuxHdyyiqmdTe3JQgBUfIVvdJiXlVRHkEw=">
-
-    <meta name="alexaVerifyID" content="lOECm39vgYv4N9PwoW6nsSSLiUw">
-    <meta name="y_key" content="145378928393bc8d">
-    <meta name="msvalidate.01" content="756854B52F963132E377E441F92F1136">
-    <meta property="fb:admins" content="100000662403967">
-
-
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.freelancer.com/jobs">
-
-
-
-
     <link href="https://www.freelancer.com/rss.xml" rel="alternate" type="application/rss+xml" title="Latest projects">
 
 
@@ -156,35 +122,22 @@ design, writing, data entry jobs and many more. Page - 1">
     <link rel="icon" href="https://www.freelancer.com/favicon.ico" type="image/ico">
     <link rel="shortcut icon" href="https://www.freelancer.com/favicon.ico">
 
-
-
-
-
-
-
-    <!-- <script type="application/ld+json">
+    <script type="application/ld+json">
     {
         "@context": "http://schema.org/",
         "@type": "Organization",
-        "name": "Freelancer",
-        "url": "http://www.freelancer.com/",
-        "logo": "http://www.freelancer.com/static/css/images/logo.jpg",
-        "sameAs" : [
-        "https://twitter.com/freelancer",
-        "https://www.facebook.com/fansoffreelancer",
-        "https://www.linkedin.com/company/freelancer-com",
-        "https://instagram.com/freelancerofficial"
-        ]
+        "name": "SEO",
+        "url": "<?= $_SERVER['HTTP_HOST'] ?>",
     }
     </script>
     <script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "name": "Freelancer",
-        "url": "https://www.freelancer.com"
+        "name": "SEO",
+        "url": "<?= $_SERVER['HTTP_HOST'] ?>",
     }
-    </script> -->
+    </script>
 
     <style type="text/css"></style>
     <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-07d26f0b.js">
@@ -323,7 +276,7 @@ design, writing, data entry jobs and many more. Page - 1">
                                     <div id="filter-panel" class="SectionJobFilter-inner">
                                         <div class="SectionJobFilter-content">
                                             <div class="SectionJobFilter-header">
-                                                <h3 class="SectionJobFilter-header-heading">Filter</h3>
+                                                <h3 class="SectionJobFilter-header-heading">Tìm kiếm</h3>
                                                 <a href="#" id="filter-close-btn" class="SectionJobFilter-header-link">
                                                     <span class="Icon Icon--small"><svg class="Icon-image" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                                             <path d="M20.707 4.707l-1.414-1.414L12 10.586 4.707 3.293 3.293 4.707 10.586 12l-7.293 7.293 1.414 1.414L12 13.414l7.293 7.293 1.414-1.414L13.414 12">

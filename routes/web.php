@@ -29,6 +29,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 
     Route::get('rss/posts.rss', [RssFeedController::class, 'index']);
     Route::get('rss/{post_id}/posts-details.rss', [RssFeedController::class, 'detail']);
+    Route::get('rss/introduction.rss', [RssFeedController::class, 'introduction']);
+    Route::get('rss/regulations.rss', [RssFeedController::class, 'regulations']);
 
     Route::group(['middleware' => ['guest']], function () {
         /**

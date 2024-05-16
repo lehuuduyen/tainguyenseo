@@ -11,7 +11,7 @@
         <keywork>{{$post->title}}|{{$post->domain}}</keywork>
         <category>{{$post->category->name}}</category>
         <author>{{$post->createdUser->username}}</author>
-        <link><?= $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/posts/details/".$post->id?> </link>
+        <link><?= $_SERVER['REQUEST_SCHEME']."://".$_SERVER['HTTP_HOST']."/"?> </link>
         <guid>{{$post->id}}</guid>
     </item>
   @endforeach

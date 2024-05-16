@@ -8,7 +8,7 @@
     <meta charset="utf-8">
     @include('home.partials.meta')
 
-    <title>freelancer api approval | Freelancer</title>
+    <title>SEO</title>
     <base href="/">
     <style type="text/css">
         @font-face {
@@ -376,15 +376,10 @@
             -webkit-font-smoothing: antialiased;
         }
     </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link href="https://www.f-cdn.com" rel="preconnect" crossorigin="">
     <link rel="manifest" href="manifest.webmanifest">
-    <meta name="theme-color" content="#1976d2">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <!-- TODO: remove those when iOS Safari fully implements W3C Web App Manifest -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Freelancer">
     <link rel="apple-touch-icon" href="https://www.f-cdn.com/assets/main/en/app-icons/apple-touch-icon.png">
     <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" href="https://www.f-cdn.com/assets/main/en/app-icons/apple-launch-1242x2688.png">
     <link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="https://www.f-cdn.com/assets/main/en/app-icons/apple-launch-828x1792.png">
@@ -396,12 +391,23 @@
     <link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" href="https://www.f-cdn.com/assets/main/en/app-icons/apple-launch-1668x2224.png">
     <link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" href="https://www.f-cdn.com/assets/main/en/app-icons/apple-launch-1536x2048.png">
     <script type="text/javascript" async="" src="https://www.googletagmanager.com/gtag/js?id=G-31ZQKFK760&amp;l=dataLayer&amp;cx=c"></script>
-    <!-- <script type="text/javascript" async="" src="https://www.google-analytics.com/analytics.js"></script> -->
     <script type="text/javascript" src="https://www.googletagmanager.com/gtag/js?id=UA-223765-6" id="gtag-sdk"></script>
-    <!-- <script async="" src="https://a.quora.com/qevents.js"></script> -->
-    <!-- <script type="text/javascript" async="" src="https://snap.licdn.com/li.lms-analytics/insight.min.js"></script> -->
-    <!-- <script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script> -->
-
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org/",
+        "@type": "Organization",
+        "name": "SEO",
+        "url": "<?= $_SERVER['HTTP_HOST'] ?>",
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "name": "SEO",
+        "url": "<?= $_SERVER['HTTP_HOST'] ?>",
+    }
+    </script>
     <style>
         .__pwa_loader_spinner__ {
             animation: __pwa_loader_spin__ 1s linear infinite;
@@ -10272,7 +10278,6 @@
                                                             <!---->
                                                         </a>
                                                     </fl-link>
-                                                    <meta _ngcontent-webapp-c581="" itemprop="position" content="1">
                                                 </fl-breadcrumbs-item>
                                                 @foreach($parentCategories as $categories)
                                                 <fl-breadcrumbs-item _ngcontent-webapp-c583="" fltrackinglabel="ProjectViewLoggedOut-BreadcrumbMainSite" link="/" _nghost-webapp-c581="" data-color="inherit" data-text-transform="uppercase" itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem" role="listitem">
@@ -10281,7 +10286,6 @@
                                                             <!---->
                                                         </a>
                                                     </fl-link>
-                                                    <meta _ngcontent-webapp-c581="" itemprop="position" content="1">
                                                 </fl-breadcrumbs-item>
                                                 @endforeach
                                             </div>
