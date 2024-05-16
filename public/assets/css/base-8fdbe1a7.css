@@ -1,4 +1,3 @@
-/*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 html {
     font-family: sans-serif;
     -ms-text-size-adjust: 100%;
@@ -1991,11 +1990,6 @@ html:not(:empty) ::placeholder {
 .btn.fl-bt-skin [class*="fl-icon-"],
 .btn.fl-bt-skin::after {
     width: 38px;
-}
-.btn::after {
-    background-image: url(/assets/css/images/ajax-loader-med-dark-e084c681.gif);
-    content: "";
-    z-index: -1;
 }
 .btn:focus {
     outline-color: #aaa;

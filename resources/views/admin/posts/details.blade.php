@@ -396,7 +396,7 @@
     {
         "@context": "http://schema.org/",
         "@type": "Organization",
-        "name": "SEO",
+        "name": "<?= $post->title ?>",
         "url": "<?= $_SERVER['HTTP_HOST'] ?>",
     }
     </script>
@@ -404,7 +404,7 @@
     {
         "@context": "http://schema.org",
         "@type": "WebSite",
-        "name": "SEO",
+        "name": "<?= $post->title ?>",
         "url": "<?= $_SERVER['HTTP_HOST'] ?>",
     }
     </script>
