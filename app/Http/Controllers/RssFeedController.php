@@ -12,8 +12,16 @@ class RssFeedController extends Controller
     {
         $posts = Posts::latest()->get();
 
-        return response()->view('rss',[
+        return response()->view('rss.index',[
             'posts' => $posts
+        ])->header('Content-Type', 'text/xml');
+    }
+
+    public function detail($id)
+    {
+        $post = Posts::findOrFail($id);
+        return response()->view('rss.post-details',[
+            'post' => $post
         ])->header('Content-Type', 'text/xml');
     }
 }

@@ -6,6 +6,8 @@
 <head>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <meta charset="utf-8">
+    @include('home.partials.meta')
+
     <title>freelancer api approval | Freelancer</title>
     <base href="/">
     <style type="text/css">
@@ -10303,8 +10305,11 @@
                                                 </fl-heading>
                                                 <fl-heading _ngcontent-webapp-c585="" _nghost-webapp-c33="" data-show-mobile="true" data-margin-bottom="small">
                                                     <!---->
-                                                    <h2 _ngcontent-webapp-c33="" data-color="foreground" data-inline="false" data-size="mid" data-size-desktop="xlarge" data-truncate="false" data-weight="bold" class="ng-star-inserted"> ₹1500-12500 INR
-                                                        <!---->
+                                                    <h2 _ngcontent-webapp-c33="" data-color="foreground" data-inline="false" data-size="mid" data-size-desktop="xlarge" data-truncate="false" data-weight="bold" class="ng-star-inserted"> 
+                                                            {{ number_format($post->min_price, 0, '', '.') }} đ
+                                                        @if(!empty($post->max_price))
+                                                        -   {{ number_format($post->max_price, 0, '', '.') }} đ
+                                                        @endif
                                                     </h2>
                                                     <!---->
                                                     <!---->
