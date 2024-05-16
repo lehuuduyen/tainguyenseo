@@ -20,7 +20,7 @@
 						<th width="20%">Tiêu đề</th>
 						<th width="10%">Danh mục</th>
 						<th width="40%" height="50">Mô tả nhanh</th>
-						<th width="20%">Giá cả</th>
+						<!-- <th width="20%">Giá cả</th> -->
 						<th class="text-center">#</th>
 					</tr>
 				</thead>
@@ -29,7 +29,7 @@
 						<th>Tiêu đề</th>
 						<th>Danh mục</th>
 						<th>Mô tả nhanh</th>
-						<th>Giá cả</th>
+						<!-- <th>Giá cả</th> -->
 						<th class="text-center">#</th>
 					</tr>
 				</tfoot>
@@ -39,11 +39,11 @@
 						<td> {{ $post->title }} </td>
 						<td> {{ $post->category->name }} </td>
 						<td> {{ $post->demo }} </td>
-						<td> {{ number_format($post->min_price, 0, '', '.') }} đ
+						<!-- <td> {{ number_format($post->min_price, 0, '', '.') }} đ
 							@if(!empty($post->max_price))
 							- {{ number_format($post->max_price, 0, '', '.') }} đ
 							@endif
-						</td>
+						</td> -->
 						<td class="text-center">
 							<form method="POST" action=" {{ route('posts.destroy', ['post' => $post->id]) }} ">
 								<a class="btn btn-primary btn-sm" href="{{ route('posts.edit', ['post' => $post->id]) }}">

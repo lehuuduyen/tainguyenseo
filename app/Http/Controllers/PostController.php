@@ -87,6 +87,7 @@ class PostController extends Controller
     {
         $formData = $request->all();
         $formData["created_by"] = auth()->user()->id;
+        $formData["min_price"] = 0;
         if ($this->isAdmin) {
             $formData["is_prestige"] = 1;
         }
@@ -182,8 +183,9 @@ class PostController extends Controller
         $post->description = $data['description'];
         $post->demo = $data['demo'];
         $post->domain = $data['domain'];
-        $post->min_price = $data['min_price'];
-        $post->max_price = $data['max_price'];
+        $post->min_price = 0;
+        // $post->min_price = $data['min_price'];
+        // $post->max_price = $data['max_price'];
         $post->status = $data['status'];
         if ($this->isAdmin) {
             if (isset($data['is_prestige']) && !$createdByAdmin) {

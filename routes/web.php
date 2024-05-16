@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DomainsController;
 use Illuminate\Http\Request;
 
 /*
@@ -51,6 +52,8 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
          * Categories
          */
         Route::resource('categories', 'CategoriesController', ['except' => ['show']]);
+        
+        Route::resource('domains', DomainsController::class);
 
         Route::resource('tools', 'ToolsController', ['except' => ['show']]);
 

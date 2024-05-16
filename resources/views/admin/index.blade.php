@@ -159,8 +159,9 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Thiết lập</h6>
             <a class="collapse-item {{ request()->is('categories*') ? ' active' : '' }}" href="{{ url('categories') }}">Danh mục</a>
-            <a class="collapse-item {{ request()->is('tools*') ? ' active' : '' }}" href="{{ url('tools') }}">Giới thiệu công cụ</a>
-            <a class="collapse-item {{ request()->is('regulations-admin*') ? ' active' : '' }}" href="{{ url('regulations-admin') }}">Quy định trung gian</a>
+            <a class="collapse-item {{ request()->is('domains*') ? ' active' : '' }}" href="{{ url('domains') }}">Website</a>
+            <!-- <a class="collapse-item {{ request()->is('tools*') ? ' active' : '' }}" href="{{ url('tools') }}">Giới thiệu công cụ</a> -->
+            <!-- <a class="collapse-item {{ request()->is('regulations-admin*') ? ' active' : '' }}" href="{{ url('regulations-admin') }}">Quy định trung gian</a> -->
           </div>
         </div>
       </li>
@@ -169,7 +170,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="/" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Tài nguyên</span>
+          <span>Danh sách</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">

@@ -95,7 +95,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
                     @endif
 
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>Giá cả </label>
                     <br>
                     <div class="col-md-6" style="display: ruby;">
@@ -105,7 +105,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
                         {{ Form::text('max_price', isset($post->max_price) ? number_format($post->max_price, 0, '', ',') : null, ['class' => 'form-control currency', 'id' => 'max_price', 'style' => 'max-width: 30%;']) }}
                     </div>
 
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="is_validate">Trạng thái: </label>
                     {{ Form::select('status', $status, NULL, [ 'class'=>'form-control', 'id' => 'status']) }}
