@@ -110,12 +110,7 @@
                         </div> -->
                     </div>
                     <div class="JobSearchCard-secondary">
-                        <div class="JobSearchCard-secondary-price">
-                            {{ number_format($post->min_price, 0, '', '.') }} đ
-                            @if(!empty($post->max_price))
-                            - {{ number_format($post->max_price, 0, '', '.') }} đ
-                            @endif
-                        </div>
+                        
                         <div class="JobSearchCard-ctas ">
                             <a href="/posts/details/{{$post->id}}" class="JobSearchCard-ctas-btn btn btn-mini btn-success" data-qtsb-section="page-job-search-new" data-qtsb-subsection="card-cta-button" data-qtsb-label="enter-cta">
                                 Enter now </a>
