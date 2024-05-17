@@ -1,7 +1,6 @@
 @extends('layouts.app-master')
 
 @section('content')
-<html lang="en" class="is-mobile-first">
 
 <head>
     <style>
@@ -130,18 +129,6 @@
     </script>
 
     <style type="text/css"></style>
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-07d26f0b.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-sanitize-eab366c5.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-route-850ff20f.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-resource-7ba99b3f.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-messages-378c068a.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/google-maps-0288be4e.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/fuse.js-c2d87d65.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
 
     <style>
 
@@ -824,5 +811,4 @@
     });
 </script>
 
-</html>
 @endsection

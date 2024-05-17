@@ -130,19 +130,6 @@
     <link rel="shortcut icon" href="https://www.freelancer.com/favicon.ico">
 
     <style type="text/css"></style>
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-07d26f0b.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-sanitize-eab366c5.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-route-850ff20f.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-resource-7ba99b3f.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/angular-messages-378c068a.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/google-maps-0288be4e.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/fuse.js-c2d87d65.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
-    <link rel="preload" as="script" href="https://www.f-cdn.com/assets/bundles/jquery-6798c358.js">
-
 
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
