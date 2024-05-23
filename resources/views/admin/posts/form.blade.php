@@ -86,15 +86,14 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
                 <div class="form-group">
                     <label for="description">Mô tả<sup style="color:red">*</sup></label>
                     @if ($mode == 'edit')
-                    <div id="editor" name="description" id="description" required="required">
-                        {!! $post->description !!}</div>
-                    <textarea style="display: none" id="description" name="description">{{ $post->description }}</textarea>
+                    <textarea id="editor" name="description" id="description" required="required">
+                        {!! $post->description !!}</textarea>
                     @else
                     <div id="editor" name="description" id="description" required="required"></div>
                     <textarea style="display: none" id="description" name="description"></textarea>
                     @endif
 
-                </div>
+                </textarea>
                 <div class="form-group">
                     <label>Giá cả </label>
                     <br>
@@ -210,7 +209,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
 </div>
 </div>
 </div>
-<script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="{!! url('assets/js/global.js') !!}"></script>
 <script>
     function clickVerify() {
@@ -278,19 +277,10 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
 <script>
     jQuery(document).ready(function() {
         var token = jQuery('input[name="_token"]').val();
-        ClassicEditor
-            .create(document.querySelector('#editor'), {
-                ckfinder: {
-                    uploadUrl: '{{ route('ckfinder_upload') }}?command=QuickUpload&type=Files&responseType=json',
-                    headers: {
-                        'X-CSRF-TOKEN': token,
-                    },
-                }
-
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        CKEDITOR.replace('editor', {
+            filebrowserUploadUrl: "/upload-image?_token=" + token,
+            filebrowserUploadMethod: 'form'
+        });
         // editor.on('text-change', function(delta, oldDelta, source) {
         //     jQuery('#description').val(editor.container.firstChild.innerHTML);
         // });
