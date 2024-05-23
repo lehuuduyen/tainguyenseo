@@ -86,15 +86,14 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
                 <div class="form-group">
                     <label for="description">Mô tả<sup style="color:red">*</sup></label>
                     @if ($mode == 'edit')
-                    <div id="editor" name="description" id="description" required="required">
-                        {!! $post->description !!}</div>
-                    <textarea style="display: none" id="description" name="description">{{ $post->description }}</textarea>
+                    <textarea id="editor" name="description" id="description" required="required">
+                        {!! $post->description !!}</textarea>
                     @else
                     <div id="editor" name="description" id="description" required="required"></div>
                     <textarea style="display: none" id="description" name="description"></textarea>
                     @endif
 
-                </div>
+                </textarea>
                 <div class="form-group">
                     <label>Giá cả </label>
                     <br>
@@ -210,7 +209,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
 </div>
 </div>
 </div>
-<script src="{!! url('assets/js/quill.js') !!}"></script>
+<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script src="{!! url('assets/js/global.js') !!}"></script>
 <script>
     function clickVerify() {
@@ -277,11 +276,16 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
 </script>
 <script>
     jQuery(document).ready(function() {
-        editor.on('text-change', function(delta, oldDelta, source) {
-            jQuery('#description').val(editor.container.firstChild.innerHTML);
+        var token = jQuery('input[name="_token"]').val();
+        CKEDITOR.replace('editor', {
+            filebrowserUploadUrl: "/upload-image?_token=" + token,
+            filebrowserUploadMethod: 'form'
         });
+        // editor.on('text-change', function(delta, oldDelta, source) {
+        //     jQuery('#description').val(editor.container.firstChild.innerHTML);
+        // });
 
-        uploadQuillImage();
+        // uploadQuillImage();
 
     });
     $('#domain').change(function() {
