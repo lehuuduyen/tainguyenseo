@@ -24,6 +24,9 @@
   <!-- Custom styles for this template-->
   <link href="{!! url('assets/css/sb-admin-2.min.css') !!}" rel="stylesheet">
   <style>
+    label {
+      font-weight: 700;
+    }
     sup{
     left: 5px;
 }
