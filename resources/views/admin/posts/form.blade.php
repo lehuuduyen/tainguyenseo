@@ -210,7 +210,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
 </div>
 </div>
 </div>
-<script src="{!! url('assets/js/quill.js') !!}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.2.0/classic/ckeditor.js"></script>
 <script src="{!! url('assets/js/global.js') !!}"></script>
 <script>
     function clickVerify() {
@@ -277,11 +277,25 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
 </script>
 <script>
     jQuery(document).ready(function() {
-        editor.on('text-change', function(delta, oldDelta, source) {
-            jQuery('#description').val(editor.container.firstChild.innerHTML);
-        });
+        var token = jQuery('input[name="_token"]').val();
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                ckfinder: {
+                    uploadUrl: '{{ route('ckfinder_upload') }}?command=QuickUpload&type=Files&responseType=json',
+                    headers: {
+                        'X-CSRF-TOKEN': token,
+                    },
+                }
 
-        uploadQuillImage();
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        // editor.on('text-change', function(delta, oldDelta, source) {
+        //     jQuery('#description').val(editor.container.firstChild.innerHTML);
+        // });
+
+        // uploadQuillImage();
 
     });
     $('#domain').change(function() {

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\RssFeedController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\CKFinderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
     /**
      * Home Routes
      */
+    Route::any('/ckfinder/connector', [CKFinderController::class, 'connector'])->name('ckfinder_connector');
+    Route::get('/ckfinder/browser', [CKFinderController::class, 'browser'])->name('ckfinder_browser');
+    Route::get('/ckfinder/upload', [CKFinderController::class, 'upload'])->name('ckfinder_upload');
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/introduction', 'HomeController@introduction')->name('home.introduction');
     Route::get('/regulations', 'HomeController@regulations')->name('home.regulations');
