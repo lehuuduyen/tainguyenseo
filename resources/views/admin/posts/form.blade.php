@@ -89,8 +89,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
                     <textarea id="editor" name="description" id="description" required="required">
                         {!! $post->description !!}</textarea>
                     @else
-                    <div id="editor" name="description" id="description" required="required"></div>
-                    <textarea style="display: none" id="description" name="description"></textarea>
+                    <textarea id="editor" name="description" id="description" required="required">
                     @endif
 
                 </textarea>
@@ -281,11 +280,7 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
             filebrowserUploadUrl: "/upload-image?_token=" + token,
             filebrowserUploadMethod: 'form'
         });
-        // editor.on('text-change', function(delta, oldDelta, source) {
-        //     jQuery('#description').val(editor.container.firstChild.innerHTML);
-        // });
 
-        // uploadQuillImage();
 
     });
     $('#domain').change(function() {
@@ -327,39 +322,6 @@ $postCategoryIsValidate =(isset($post) && $post->is_validated ==1)?$post->is_val
 
         }
         cssValidAfter()
-    }
-    // Insert Image by uploading to server instead of Base64
-    function uploadQuillImage() {
-        var token = jQuery('input[name="_token"]').val();
-        var toolbar = editor.getModule("toolbar");
-        toolbar.addHandler("image", function() {
-            var input = document.createElement("input");
-            input.setAttribute("type", "file");
-            input.setAttribute("accept", "image/*");
-            input.click();
-
-            input.onchange = function() {
-                var file = input.files[0];
-                var formData = new FormData();
-                formData.append("image", file);
-
-                fetch("/upload-image", {
-                        method: "POST",
-                        headers: {
-                            'X-CSRF-TOKEN': token
-                        },
-                        body: formData,
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        const range = editor.getSelection();
-                        editor.insertEmbed(range.index, "image", data.url);
-                    })
-                    .catch((error) => {
-                        console.error("Error:", error);
-                    });
-            };
-        });
     }
 </script>
 @stop
